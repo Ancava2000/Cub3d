@@ -1,0 +1,3 @@
+[submodule "include/minilibx"]
+	path = include/minilibx
+	url = https://github.com/42paris/minilibx-linux
