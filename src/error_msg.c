@@ -6,7 +6,7 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:41:17 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/11/27 15:16:36 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/11/27 15:41:17 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	free_array(char **str)
 
 void	free_data(t_data *data)
 {
-	if (data->map)
-		free(data->map);
-	if (data->map_copy)
-		free(data->map_copy);
+	if (data->line)
+		free(data->line);
+	if (data->line_copy)
+		free(data->line_copy);
 	if (data->map_array)
 		free_array(data->map_array);
 	if (data->texture_no)
@@ -74,5 +74,5 @@ int	ft_error_msg(char *str, t_game *game)
 	write(2, str, ft_strlen(str));
 	if (game)
 		free_game(game);
-	return (-1);
+	return (1);
 }

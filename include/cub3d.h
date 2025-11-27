@@ -6,7 +6,7 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:44:52 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/11/27 15:14:15 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/11/27 15:39:28 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdbool.h>
+# include <fcntl.h>
 # include "mlx.h"
 # include "libft.h"
 
@@ -77,8 +78,8 @@ typedef struct s_color
 // struct all data (*map, *map_copy, **map, all textures, F parseo (color), c parseo (color), floor color, ceiling color,)
 typedef struct s_data
 {
-	char		*map;
-	char		*map_copy;
+	char		*line;
+	char		*line_copy;
 	char		**map_array;
 	char		*texture_no;
 	char		*texture_so;
@@ -108,5 +109,6 @@ typedef struct s_game
 
 
 int	ft_error_msg(char *str, t_game *game);
+int	check_args(int ac, char **av, t_game *game);
 
 #endif

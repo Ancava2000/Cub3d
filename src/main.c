@@ -6,11 +6,24 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:38:07 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/11/27 14:53:37 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/11/27 15:46:27 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+int	check_args(int ac, char **av, t_game *game)
+{
+	char	*extension;
+	int		fd;
+
+	if (ac != 2)
+		return(ft_error_msg("Only two arguments: ./cub3d + *.cub\n", game));
+	extension = ft_strrchr(av[1], ".");
+	if (!extension || ft_strncmp(extension, ".cub", 5) != 0)
+		return(ft_error_msg("Not the correct extension. It must be .cub\n", game));
+	return (0);
+}
 
 int	main(int ac, char **av)
 {
@@ -18,15 +31,16 @@ int	main(int ac, char **av)
 	
 	game = ft_calloc(1, sizeof (t_game));
 	if (!game)
-		ft_error_msg("Error allocating memory for game", game);
+		return (ft_error_msg("Error allocating memory for game\n", game));
 	game->data = ft_calloc(1, sizeof(t_data));
 	if (!game->data)
-		ft_error_msg("Error allocating memory for data", game);
-	if (check_args(ac, av))
+		return (ft_error_msg("Error allocating memory for data\n", game));
+	if (check_args(ac, av, game))
 		return (-1);
-	if (parse(ac, av))
+	if (parse(ac, av, game))
 		return (-1);
 	if (init_game(game))
 		return (-1);
+	free_game(game);
 	return (0);
 }
