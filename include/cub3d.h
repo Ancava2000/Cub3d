@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <fcntl.h>
+# include <ctype.h>
 # include "mlx.h"
 # include "libft.h"
 
@@ -78,13 +79,12 @@ typedef struct s_color
 // struct all data (*map, *map_copy, **map, all textures, F parseo (color), c parseo (color), floor color, ceiling color,)
 typedef struct s_data
 {
+	int			fd;
 	char		*line;
 	char		*line_copy;
 	char		**map_array;
-	char		*texture_no;
-	char		*texture_so;
-	char		*texture_ea;
-	char		*texture_we;
+	char		*textures;
+	char		**textures_split;
 	char		**f_color;
 	char		**c_color;
 	t_color		floor;

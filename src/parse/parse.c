@@ -10,4 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// Read all .cub map y call all parse
+#include "cub3d.h"
+
+int	read_map(char *av, t_game *game)
+{
+	game->data->fd = open(av, O_RDONLY);
+	if (game->data->fd == NULL)
+	{
+		close(game->data->fd);
+		return (ft_error_msg("Error opening map\n", game));
+	}
+	game->data->line = get_next_line(game->data->fd);
+	if (game->data->line == NULL)
+		return (ft_error_msg("Error opening map\n", game));
+	close(game->data->fd);
+	return (0);
+}
+
+int parse(int ac, char **av, t_game *game)
+{
+	if (read_map(av[1], game))
+		return (-1);
+	if (parse_textures(game))
+		return(-1);
+	if (parse_colors())
+		return(-1);
+	if (parse_map())
+		return(-1);
+	return (0);
+}

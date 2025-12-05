@@ -12,6 +12,18 @@
 
 #include "../include/cub3d.h"
 
+int	init_game(t_game *game)
+{
+	game->data->fd = -1;
+	game->data->line = NULL;
+	game->data->map_array = NULL;
+	game->data->textures = NULL;
+	game->data->textures_split = NULL;
+	game->data->f_color = NULL;
+	game->data->c_color = NULL;
+	return (0);
+}
+
 int	check_args(int ac, char **av, t_game *game)
 {
 	char	*extension;
@@ -30,6 +42,7 @@ int	main(int ac, char **av)
 	t_game	*game;
 	
 	game = ft_calloc(1, sizeof (t_game));
+	init_game(game);
 	if (!game)
 		return (ft_error_msg("Error allocating memory for game\n", game));
 	game->data = ft_calloc(1, sizeof(t_data));
@@ -37,7 +50,7 @@ int	main(int ac, char **av)
 		return (ft_error_msg("Error allocating memory for data\n", game));
 	if (check_args(ac, av, game))
 		return (-1);
-	if (parse(ac, av, game))
+	if (parse(av, game))
 		return (-1);
 	if (init_game(game))
 		return (-1);
