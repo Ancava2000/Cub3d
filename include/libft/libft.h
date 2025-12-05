@@ -91,4 +91,8 @@ char	*ft_strchr_gnl(char *s, int c);
 int		ft_strlen_gnl(const char *s);
 void	*ft_calloc_gnl(size_t count, size_t size);
 
+//cub3d
+char	*ft_skipspace(char *str);
+int		ft_isspace(int c);
+
 #endif

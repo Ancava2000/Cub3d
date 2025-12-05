@@ -37,6 +37,9 @@ ft_toupper.c \
 \
 get_next_line_utils.c \
 get_next_line.c \
+\
+ft_skipspace.c
+ft_isspace.c
 
 BSRC = ft_lstadd_back_bonus.c \
 ft_lstadd_front_bonus.c \

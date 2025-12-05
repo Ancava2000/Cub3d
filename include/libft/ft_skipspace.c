@@ -1,14 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_colors.c                                     :+:      :+:    :+:   */
+/*   ft_skipspace.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/27 15:52:24 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/05 14:29:40 by acarro-v         ###   ########.fr       */
+/*   Created: 2025/12/05 13:34:16 by acarro-v          #+#    #+#             */
+/*   Updated: 2025/12/05 14:10:24 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "libft.h"
 
+char	*ft_skipspace(char *str)
+{
+	while (*str && ft_isspace(*str))
+		str++;
+	return str;
+}

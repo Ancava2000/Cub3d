@@ -6,7 +6,7 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:44:52 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/11/27 15:39:28 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/05 12:57:10 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <stdbool.h>
 # include <fcntl.h>
 # include <ctype.h>
-# include "mlx.h"
-# include "libft.h"
+# include "minilibx/mlx.h"
+# include "libft/libft.h"
 
 # define TITLE "cub3D"
 # define WIDTH 1920
@@ -68,6 +68,17 @@ typedef struct s_image
 	int		height;
 }			t_image;
 
+// struct to count textures
+typedef	struct s_count
+{
+	int	no;
+	int	so;
+	int	we;
+	int	ea;
+	int	f;
+	int	c;
+}	t_count;
+
 // struct color (r, g, b of floor and ceiling)
 typedef struct s_color
 {
@@ -76,6 +87,13 @@ typedef struct s_color
 	int b;
 }		t_color;
 
+typedef struct s_texture
+{
+	char		*name;
+	char		*path;
+	t_texture	*next;
+}	t_texture;
+
 // struct all data (*map, *map_copy, **map, all textures, F parseo (color), c parseo (color), floor color, ceiling color,)
 typedef struct s_data
 {
@@ -83,8 +101,9 @@ typedef struct s_data
 	char		*line;
 	char		*line_copy;
 	char		**map_array;
-	char		*textures;
+	char		*textures_line;
 	char		**textures_split;
+	t_count		*count;
 	char		**f_color;
 	char		**c_color;
 	t_color		floor;
@@ -95,6 +114,7 @@ typedef struct s_data
 typedef struct s_game
 {
 	t_data		*data;   // to create a canvas
+	t_texture	*texture;
 	t_image		image_no;
 	t_image		image_so;
 	t_image		image_we;

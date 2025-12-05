@@ -6,11 +6,11 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:51:38 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/11/27 15:52:12 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/05 14:38:24 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../include/cub3d.h"
 
 int	read_map(char *av, t_game *game)
 {
@@ -27,15 +27,19 @@ int	read_map(char *av, t_game *game)
 	return (0);
 }
 
-int parse(int ac, char **av, t_game *game)
+int	parse(int ac, char **av, t_game *game)
 {
 	if (read_map(av[1], game))
 		return (-1);
 	if (parse_textures(game))
-		return(-1);
-	if (parse_colors())
-		return(-1);
+		return (-1);
+	if (parse_colors(game))
+		return (-1);
 	if (parse_map())
-		return(-1);
+		return (-1);
+	if (list_textures())
+		return (-1);
+	if (list_colors())
+		return (-1);
 	return (0);
 }
