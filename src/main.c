@@ -6,13 +6,13 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:38:07 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/05 14:23:20 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/08 12:33:17 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int	init_game(t_game *game)
+int	init_parse(t_game *game)
 {
 	game->data->fd = -1;
 	game->data->line = NULL;
@@ -22,8 +22,6 @@ int	init_game(t_game *game)
 	game->data->count = ft_calloc(1, sizeof(t_count));
 	if (!game->data->count)
 		return (ft_error_msg("Failed to allocate count\n", game));
-	game->data->f_color = NULL;
-	game->data->c_color = NULL;
 	game->texture = NULL;
 	return (0);
 }
@@ -31,11 +29,10 @@ int	init_game(t_game *game)
 int	check_args(int ac, char **av, t_game *game)
 {
 	char	*extension;
-	int		fd;
 
 	if (ac != 2)
 		return (ft_error_msg("Only two arguments: ./cub3d + *.cub\n", game));
-	extension = ft_strrchr(av[1], ".");
+	extension = ft_strrchr(av[1], '.');
 	if (!extension || ft_strncmp(extension, ".cub", 5) != 0)
 		return (ft_error_msg("Not the correct extension. It must be .cub\n",
 				game));
@@ -52,7 +49,7 @@ int	main(int ac, char **av)
 	game->data = ft_calloc(1, sizeof(t_data));
 	if (!game->data)
 		return (ft_error_msg("Error allocating memory for data\n", game));
-	if (init_game(game))
+	if (init_parse(game))
 		return (-1);
 	if (check_args(ac, av, game))
 		return (-1);

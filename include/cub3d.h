@@ -6,7 +6,7 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:44:52 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/05 12:57:10 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/08 14:44:24 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdbool.h>
 # include <fcntl.h>
 # include <ctype.h>
+# include <stdio.h>
 # include "minilibx/mlx.h"
 # include "libft/libft.h"
 
@@ -87,6 +88,9 @@ typedef struct s_color
 	int b;
 }		t_color;
 
+// struct for textures
+typedef struct s_texture t_texture;
+
 typedef struct s_texture
 {
 	char		*name;
@@ -94,7 +98,7 @@ typedef struct s_texture
 	t_texture	*next;
 }	t_texture;
 
-// struct all data (*map, *map_copy, **map, all textures, F parseo (color), c parseo (color), floor color, ceiling color,)
+// struct all data of parse(*map, *map_copy, **map, all textures, F parseo (color), c parseo (color), floor color, ceiling color,)
 typedef struct s_data
 {
 	int			fd;
@@ -104,10 +108,6 @@ typedef struct s_data
 	char		*textures_line;
 	char		**textures_split;
 	t_count		*count;
-	char		**f_color;
-	char		**c_color;
-	t_color		floor;
-	t_color		ceiling;
 }				t_data;
 
 // struct game with all structs (all data (textures paths), player, movements, all images, image mlx, mlx, window)
@@ -115,6 +115,8 @@ typedef struct s_game
 {
 	t_data		*data;   // to create a canvas
 	t_texture	*texture;
+	t_color		floor;
+	t_color		ceiling;
 	t_image		image_no;
 	t_image		image_so;
 	t_image		image_we;
@@ -128,7 +130,15 @@ typedef struct s_game
 }	t_game;
 
 
-int	ft_error_msg(char *str, t_game *game);
-int	check_args(int ac, char **av, t_game *game);
+int		parse(char **av, t_game *game);
+int		parse_textures(t_game *game);
+int		parse_colors(t_game *game);
+int		process_texture_lines(t_game *game, int *count);
+int		check_text_name(char *line);
+int		list_textures(t_game *game);
+int		list_colors(t_game *game);
+int		ft_error_msg(char *str, t_game *game);
+void	free_game(t_game *game);
+void	free_array(char **str);
 
 #endif

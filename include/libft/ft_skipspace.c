@@ -6,7 +6,7 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 13:34:16 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/05 14:10:24 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/08 13:59:04 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_skipspace(char *str)
 {
-	while (*str && ft_isspace(*str))
+	while (*str && (*str == ' ' || *str == '\t'))
 		str++;
-	return str;
+	return (str);
 }

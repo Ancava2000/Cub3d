@@ -6,18 +6,34 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:41:17 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/05 13:04:02 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/08 11:45:23 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	free_list(t_texture *texture)
+{
+	t_texture	*temp;
+
+	while (texture)
+	{
+		temp = texture->next;
+		if (texture->name)
+			free(texture->name);
+		if (texture->path)
+			free(texture->path);
+		free(texture);
+		texture = temp;
+	}
+}
 
 void	free_array(char **str)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (str[i] != NULL)
 	{
 		free(str[i]);
 		i++;
@@ -33,16 +49,10 @@ void	free_data(t_data *data)
 		free(data->line_copy);
 	if (data->map_array)
 		free_array(data->map_array);
-	if (data->textures)
-		free(data->textures);
 	if (data->textures_split)
 		free_array(data->textures_split);
 	if (data->count)
-		free_array(data->count);
-	if (data->f_color)
-		free_array(data->f_color);
-	if (data->c_color)
-		free_array(data->c_color);
+		free(data->count);
 	free(data);
 }
 
@@ -50,6 +60,8 @@ void	free_game(t_game *game)
 {
 	if (game->data)
 		free_data(game->data);
+	if (game->texture)
+		free_list(game->texture);
 	if (game->image_no.ptr)
 		mlx_destroy_image(game->mlx, game->image_no.ptr);
 	if (game->image_so.ptr)
