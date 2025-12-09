@@ -6,7 +6,7 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:52:14 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/08 14:50:16 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/09 11:45:44 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ int	textures_split(t_game *game)
 	if (game->data->count->no != 1 || game->data->count->so != 1
 		|| game->data->count->ea != 1 || game->data->count->we != 1
 		|| game->data->count->c != 1 || game->data->count->f != 1)
-		return (ft_error_msg("Error with duplicates", game));
+		return (ft_error_msg("Error with duplicates\n", game));
 	if (check_format(textures_split))
-		return (ft_error_msg("Error with texture format", game));
+		return (ft_error_msg("Error with texture format\n", game));
 	return (0);
 }
 
