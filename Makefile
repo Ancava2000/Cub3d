@@ -1,17 +1,13 @@
-# Nombre del ejecutable
 NAME = cub3D
 
-# Compilador y flags
 CC = clang
 CFLAGS = -Wall -Wextra -Werror -g
 
-# Directorios
 SRCDIR = src
 INCDIR = include
 LIBFTDIR = $(INCDIR)/libft
 MLXDIR = $(INCDIR)/minilibx
 
-# Archivos fuente
 SRC = $(SRCDIR)/main.c \
 		$(SRCDIR)/parse/parse.c \
 		$(SRCDIR)/parse/parse_textures.c \
@@ -21,14 +17,16 @@ SRC = $(SRCDIR)/main.c \
 		$(SRCDIR)/parse/list_colors.c \
 		$(SRCDIR)/error_msg.c
 
-# Archivos objeto
-OBJ = $(SRC:.c=.o)
+OBJ_DIR			= $(SRCDIR)/obj
+OBJ			= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
-# Librerías
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
 LIBFT = $(LIBFTDIR)/libft.a
 MLX = $(MLXDIR)/libmlx.a
 
-# Comandos
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
@@ -42,6 +40,7 @@ $(MLX):
 
 clean:
 	@rm -f $(OBJ)
+	@rm -rf $(OBJ_DIR)
 	@make clean -C $(LIBFTDIR)
 	@make clean -C $(MLXDIR)
 
