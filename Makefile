@@ -1,3 +1,5 @@
+HOT_PINK			=	\033[38;5;169m
+
 NAME = cub3D
 
 CC = clang
@@ -31,6 +33,19 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -L$(LIBFTDIR) -lft -L$(MLXDIR) -lmlx -lX11 -lXext -lm -lbsd
+	@echo "$(HOT_PINK)"
+	@sleep 0.1
+	@echo " ██████╗██╗   ██╗██████╗ ██████╗ ██████╗ "
+	@sleep 0.1
+	@echo "██╔════╝██║   ██║██╔══██╗╚════██╗██╔══██╗"
+	@sleep 0.1
+	@echo "██║     ██║   ██║██████╔╝ █████╔╝██║  ██║"
+	@sleep 0.1
+	@echo "██║     ██║   ██║██╔══██╗ ╚═══██╗██║  ██║"
+	@sleep 0.1
+	@echo "╚██████╗╚██████╔╝██████╔╝██████╔╝██████╔╝"
+	@sleep 0.1
+	@echo
 
 $(LIBFT):
 	@make -C $(LIBFTDIR)

@@ -25,13 +25,3 @@ void	ft_bzero(void *s, size_t n)
 		i++;
 	}
 }
-
-/*
-int main()
-{
-	char buffer[10];
-	ft_bzero(buffer, sizeof(buffer));  Returns: Todos los bytes de buffer (10) a cero.
- 	int numbers[5];
-  	ft_bzero(numbers, 5 * sizeof(int);  Returns: Todos los bytes de numbers (5) a cero.
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:09:29 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/08 13:39:24 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/10 16:39:08 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ char	*buffer_copy(char *buffer)
 		line[i] = buffer[i];
 		i++;
 	}
+	if (buffer[i] == '\n')
+    {
+        line[i] = '\n';
+        i++;
+    }
 	line[i] = '\0';
 	return (line);
 }

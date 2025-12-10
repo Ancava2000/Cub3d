@@ -6,7 +6,7 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 14:14:40 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/08 15:06:43 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:29:45 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,41 +27,40 @@ void	add_node(t_game *game, t_texture *new)
 	current->next = new;
 }
 
-int	get_path(char *line, int j)
-{
-	while (ft_isspace(line[j]))
-		j++;
-	return (j);
-}
-
+// returns the node with the name and path of the texture
 t_texture	*create_texture(t_game *game, int i)
 {
 	int			j;
+	int			end;
 	char		**textures;
 	t_texture	*new_texture;
 
-	j = 0;
 	textures = game->data->textures_split;
 	new_texture = ft_calloc(1, sizeof(t_texture));
 	if (!new_texture)
 		ft_error_msg("Failed to allocate count\n", game);
-	while (ft_isspace(textures[i][j]))
-		j++;
-	new_texture->name = ft_substr(textures[i], j, 2);
+	new_texture->name = ft_substr(textures[i], 0, 2);
 	if (!new_texture->name)
 		ft_error_msg("Failed to allocate texture\n", game);
-	new_texture->path = ft_substr(textures[i], get_path(textures[i], j + 2),
-			ft_strlen(textures[i]) - get_path(textures[i], j + 2));
+	j = 2;
+	while (ft_isspace(textures[i][j]))
+		j++;
+	end = ft_strlen(textures[i]) - 1;
+	while (end > j && ft_isspace(textures[i][end]))
+		end--;
+	new_texture->path = ft_substr(textures[i], j, end - j + 1);
 	if (!new_texture->path)
 		ft_error_msg("Failed to allocate texture\n", game);
 	new_texture->next = NULL;
 	return (new_texture);
 }
 
+// only create the texture node when it starts with NO, SO, WE,or EA
+// then add the node to the linked list
 int	list_textures(t_game *game)
 {
 	int			i;
-	t_texture	*temp;
+	t_texture	*new_node;
 
 	i = 0;
 	while (game->data->textures_split[i])
@@ -71,10 +70,10 @@ int	list_textures(t_game *game)
 			|| !ft_strncmp(game->data->textures_split[i], "WE", 2)
 			|| !ft_strncmp(game->data->textures_split[i], "EA", 2))
 		{
-			temp = create_texture(game, i);
-			if (!temp)
+			new_node = create_texture(game, i);
+			if (!new_node)
 				return (1);
-			add_node(game, temp);
+			add_node(game, new_node);
 		}
 		i++;
 	}

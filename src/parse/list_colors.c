@@ -6,7 +6,7 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 08:37:24 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/08 14:52:43 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:32:58 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int	create_color(t_game *game, int i)
 
 	j = 0;
 	textures = game->data->textures_split;
-	while (ft_isspace(textures[i][j]))
-		j++;
 	if (textures[i][j] == 'C')
 		color = &game->ceiling;
 	else if (textures[i][j] == 'F')

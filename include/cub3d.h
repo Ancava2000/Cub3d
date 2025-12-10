@@ -6,7 +6,7 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:44:52 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/08 14:44:24 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/10 15:11:58 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "minilibx/mlx.h"
 # include "libft/libft.h"
 
+// For the mlx
 # define TITLE "cub3D"
 # define WIDTH 1920
 # define HEIGHT 1080
@@ -88,7 +89,7 @@ typedef struct s_color
 	int b;
 }		t_color;
 
-// struct for textures
+// struct for textures: name(NO, SO,...) and path(./...)
 typedef struct s_texture t_texture;
 
 typedef struct s_texture
@@ -101,19 +102,19 @@ typedef struct s_texture
 // struct all data of parse(*map, *map_copy, **map, all textures, F parseo (color), c parseo (color), floor color, ceiling color,)
 typedef struct s_data
 {
-	int			fd;
-	char		*line;
+	int			fd; // to save the .cub
+	char		*line; // each line of the .cub with get_next_line
 	char		*line_copy;
 	char		**map_array;
-	char		*textures_line;
-	char		**textures_split;
+	char		*textures_line; // a string with all the textures
+	char		**textures_split; // all the textures split by '\0'
 	t_count		*count;
 }				t_data;
 
 // struct game with all structs (all data (textures paths), player, movements, all images, image mlx, mlx, window)
 typedef struct s_game
 {
-	t_data		*data;   // to create a canvas
+	t_data		*data;
 	t_texture	*texture;
 	t_color		floor;
 	t_color		ceiling;
@@ -126,17 +127,21 @@ typedef struct s_game
 	t_ray		raycasting;
 	void		*mlx;
 	void		*window;
-	void		*image;
+	void		*image; // to create a canvas
 }	t_game;
 
-
+// PARSE GENERAL
 int		parse(char **av, t_game *game);
 int		parse_textures(t_game *game);
 int		parse_colors(t_game *game);
 int		process_texture_lines(t_game *game, int *count);
 int		check_text_name(char *line);
+
+// PARSE CREATE LISTS
 int		list_textures(t_game *game);
 int		list_colors(t_game *game);
+
+// ERRORS AND FREE
 int		ft_error_msg(char *str, t_game *game);
 void	free_game(t_game *game);
 void	free_array(char **str);

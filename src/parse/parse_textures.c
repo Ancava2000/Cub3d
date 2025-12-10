@@ -6,7 +6,7 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:52:14 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/09 11:45:44 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:56:48 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ int	check_format(char **textures)
 	{
 		line = textures[i];
 		if (*line == 'F' || *line == 'C')
-		{
 			i++;
-			continue ;
-		}
 		if (!ft_strncmp(line, "NO", 2) || !ft_strncmp(line, "SO", 2)
 			|| !ft_strncmp(line, "WE", 2) || !ft_strncmp(line, "EA", 2))
 		{
@@ -56,6 +53,8 @@ void	count_textures(char	*line, t_count *count)
 		count->f++;
 }
 
+// Splits the textures and count them (all of them, textures + color).
+// Checks the duplicates and the format ./
 int	textures_split(t_game *game)
 {
 	char	**textures_split;
@@ -74,7 +73,7 @@ int	textures_split(t_game *game)
 		|| game->data->count->c != 1 || game->data->count->f != 1)
 		return (ft_error_msg("Error with duplicates\n", game));
 	if (check_format(textures_split))
-		return (ft_error_msg("Error with texture format\n", game));
+		return (ft_error_msg("Error with texture format, it's ./\n", game));
 	return (0);
 }
 
@@ -87,6 +86,7 @@ int	check_text_name(char *line)
 	return (0);
 }
 
+// Saves the textures in texture_line, checks the count and split the line by '\n'
 int	parse_textures(t_game *game)
 {
 	int	count;

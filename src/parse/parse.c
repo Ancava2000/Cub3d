@@ -6,12 +6,13 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:51:38 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/08 12:25:44 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/10 15:12:53 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
+// open the map and save the first line
 int	read_map(char *av, t_game *game)
 {
 	game->data->fd = open(av, O_RDONLY);
@@ -34,9 +35,9 @@ int	parse(char **av, t_game *game)
 		return (-1);
 	if (parse_colors(game))
 		return (-1);
-	close(game->data->fd);
 //	if (parse_map())
 //		return (-1);
+	close(game->data->fd);
 	if (list_textures(game))
 		return (-1);
 	if (list_colors(game))

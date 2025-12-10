@@ -6,12 +6,56 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:38:07 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/08 12:33:17 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/10 16:58:46 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+void	print_textures_raw(t_game *game)
+{
+    printf("\n=== TEXTURES_LINE (raw string) ===\n");
+    printf("'%s'\n", game->data->textures_line);
+}
+
+void	print_textures_split(t_game *game)
+{
+    int i = 0;
+    
+    printf("\n=== TEXTURES_SPLIT (array after split) ===\n");
+    while (game->data->textures_split[i])
+    {
+        printf("[%d]: '%s'\n", i, game->data->textures_split[i]);
+        i++;
+    }
+}
+
+void	print_texture_list(t_game *game)
+{
+    t_texture *current = game->texture;
+    int i = 0;
+    
+    printf("\n=== TEXTURE LINKED LIST ===\n");
+    while (current)
+    {
+        printf("Node %d:\n", i);
+        printf("  Name: '%s'\n", current->name);
+        printf("  Path: '%s'\n", current->path);
+        current = current->next;
+        i++;
+    }
+}
+
+void	print_colors(t_game *game)
+{
+    printf("\n=== COLORS ===\n");
+    printf("Ceiling: R=%d G=%d B=%d\n", 
+        game->ceiling.r, game->ceiling.g, game->ceiling.b);
+    printf("Floor:   R=%d G=%d B=%d\n", 
+        game->floor.r, game->floor.g, game->floor.b);
+}
+
+// Init all the parse data
 int	init_parse(t_game *game)
 {
 	game->data->fd = -1;
@@ -39,6 +83,7 @@ int	check_args(int ac, char **av, t_game *game)
 	return (0);
 }
 
+//Allocate memory and call all functions
 int	main(int ac, char **av)
 {
 	t_game	*game;
@@ -54,7 +99,11 @@ int	main(int ac, char **av)
 	if (check_args(ac, av, game))
 		return (-1);
 	if (parse(av, game))
-		return (-1);
+		return (-1);   
+	print_textures_raw(game);
+    print_textures_split(game);
+    print_texture_list(game);
+    print_colors(game);
 	free_game(game);
 	return (0);
 }

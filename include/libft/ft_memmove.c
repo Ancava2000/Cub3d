@@ -40,12 +40,3 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	}
 	return (dst);
 }
-
-/*
-int main ()
-{
-	char src[] = "newstring";
-	char dest[] = "oldstring"
-	ft_memmove(dest, src, 9);  Returns: src string copied to dest string (now newstring).
-}
-*/
