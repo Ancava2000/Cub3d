@@ -6,11 +6,14 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:52:14 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/10 17:56:48 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/10 18:29:55 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+// change check format to check_direction. I only have to check if I can open the path
+// I don't need to check for ./ because it can change or if the path ends with .xpm
 
 int	check_format(char **textures)
 {

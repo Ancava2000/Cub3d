@@ -6,11 +6,14 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:52:24 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/10 17:54:02 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/10 18:27:55 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+// Do I accept the colors format like: F      120     ,    40, 200    
+// Or I can only accept: F 120,40,200   without spaces in between
 
 int	check_range(char *color)
 {
@@ -66,7 +69,6 @@ int	check_number(char *color)
 			i++;
 		if (!ft_isdigit(color[i]))
 		{
-			ft_putstr_fd("Only numbers and commas in color texture\n", 2);
 			return (1);
 		}
 		while (ft_isdigit(color[i]))
