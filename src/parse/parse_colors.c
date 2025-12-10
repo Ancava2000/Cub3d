@@ -13,7 +13,7 @@
 #include "../../include/cub3d.h"
 
 // Do I accept the colors format like: F      120     ,    40, 200    
-// Or I can only accept: F 120,40,200   without spaces in between
+// Or I can only accept: F 120,40,200   without spaces in between or after
 
 int	check_range(char *color)
 {
