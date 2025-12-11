@@ -6,7 +6,7 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:52:24 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/10 18:27:55 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/11 19:05:47 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 // Do I accept the colors format like: F      120     ,    40, 200    
 // Or I can only accept: F 120,40,200   without spaces in between or after
 
+int	validate_number(int num)
+{
+	if (num < 0 || num > 255)
+	{
+		ft_putstr_fd("Only a number between 0 and 255\n", 2);
+		return (1);
+	}
+	return (0);
+}
+
 int	check_range(char *color)
 {
 	int	num;
@@ -22,8 +32,6 @@ int	check_range(char *color)
 
 	i = 0;
 	if (color[i] == 'F' || color[i] == 'C')
-		i++;
-	while (ft_isspace(color[i]))
 		i++;
 	while (color[i])
 	{
@@ -35,11 +43,8 @@ int	check_range(char *color)
 			num = num * 10 + (color[i] - '0');
 			i++;
 		}
-		if (num < 0 || num > 255)
-		{
-			ft_putstr_fd("Only a number between 0 and 255\n", 2);
+		if (validate_number(num))
 			return (1);
-		}
 		while (ft_isspace(color[i]))
 			i++;
 		if (color[i] == ',')

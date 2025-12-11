@@ -6,7 +6,7 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:52:14 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/10 18:29:55 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/11 18:50:57 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 // change check format to check_direction. I only have to check if I can open the path
 // I don't need to check for ./ because it can change or if the path ends with .xpm
 
-int	check_format(char **textures)
+int	check_path(char **textures)
 {
 	int		i;
 	char	*line;
+	char	*path;
 
 	i = 0;
 	while (textures[i])
@@ -32,7 +33,10 @@ int	check_format(char **textures)
 			line += 2;
 			while (ft_isspace(*line))
 				line++;
-			if (line[0] != '.' || line[1] != '/' || line[2] == '\0')
+			if (line[0] == '\0')
+				return (1);
+			path = line;
+			if (check_open_path(path))
 				return (1);
 		}
 		i++;
@@ -42,17 +46,17 @@ int	check_format(char **textures)
 
 void	count_textures(char	*line, t_count *count)
 {
-	if (ft_strncmp(line, "NO ", 3) == 0)
+	if (ft_strncmp(line, "NO", 2) == 0)
 		count->no++;
-	else if (ft_strncmp(line, "SO ", 3) == 0)
+	else if (ft_strncmp(line, "SO", 2) == 0)
 		count->so++;
-	else if (ft_strncmp(line, "EA ", 3) == 0)
+	else if (ft_strncmp(line, "EA", 2) == 0)
 		count->ea++;
-	else if (ft_strncmp(line, "WE ", 3) == 0)
+	else if (ft_strncmp(line, "WE", 2) == 0)
 		count->we++;
-	else if (ft_strncmp(line, "C ", 2) == 0)
+	else if (ft_strncmp(line, "C", 1) == 0)
 		count->c++;
-	else if (ft_strncmp(line, "F ", 2) == 0)
+	else if (ft_strncmp(line, "F", 1) == 0)
 		count->f++;
 }
 
@@ -75,8 +79,8 @@ int	textures_split(t_game *game)
 		|| game->data->count->ea != 1 || game->data->count->we != 1
 		|| game->data->count->c != 1 || game->data->count->f != 1)
 		return (ft_error_msg("Error with duplicates\n", game));
-	if (check_format(textures_split))
-		return (ft_error_msg("Error with texture format, it's ./\n", game));
+	if (check_path(textures_split))
+		return (ft_error_msg("Error with texture path\n", game));
 	return (0);
 }
 

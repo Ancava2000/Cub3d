@@ -1,0 +1,10 @@
+NO      ./src/textures/texture.xpm
+SO ./src/textures/texture.xpm
+WE ./src/textures/texture.xpm
+
+
+F    222,    280  ,   100     
+C    222,    3  ,  100			      
+EA            ./src/textures/texture.xpm
+
+1111
