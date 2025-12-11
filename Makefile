@@ -2,7 +2,7 @@ HOT_PINK			=	\033[38;5;169m
 
 NAME = cub3D
 
-CC = clang
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -I$(INCDIR)/MLX42/include
 LDFLAGS = -L$(MLXDIR)/build -lmlx42 -lglfw -ldl -lm -pthread
 
@@ -58,7 +58,6 @@ $(MLX):
 
 clean:
 	@make clean -C $(LIBFTDIR)
-	@rm -rf $(MLXDIR)/build
 	@rm -rf $(OBJ_DIR)
 
 fclean: clean
