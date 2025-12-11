@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: azibechi <azibechi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:44:52 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/10 15:11:58 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/11 19:17:09 by azibechi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <fcntl.h>
 # include <ctype.h>
 # include <stdio.h>
-# include "minilibx/mlx.h"
+# include "MLX42/include/MLX42/MLX42.h"
 # include "libft/libft.h"
 
 // For the mlx
@@ -26,11 +26,17 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 
+typedef struct s_axis
+{
+	double	x;
+	double	y;
+}			t_axis;	
+
+
 // struct player (position(x y), rot speed, move speed, direction(x y), camera x y)
 typedef struct s_player
 {
-	double	pos_x;
-	double	pos_y;
+	t_axis	pos;
 	double	dir;
 	double	actul_rot;
 	double	rot_speed;
@@ -51,21 +57,18 @@ typedef struct s_moves
 // struct raycasting (ray direction, x camera coordenate(calculate vector of the direction), )
 typedef struct s_ray
 {
-	double	ray_dir_x;
-	double	ray_dir_y;
+	t_axis	ray_dir;
 	double	camera_x;
-	double	delta_dist_x;
-	double	delta_dist_y;
-	double	side_dist_x;
-	double	side_dist_y;
-	int		step_x;
-	int		step_y;
+	t_axis	delta_dist;
+	t_axis	side_dist;
+	t_axis	step;
 }			t_ray;
 
 // images void * width and height(to use mlx_file_to_image)
 typedef struct s_image
 {
 	void	*ptr;   // stores reference to image
+	char	*data;
 	int		width;
 	int		height;
 }			t_image;
@@ -145,5 +148,8 @@ int		list_colors(t_game *game);
 int		ft_error_msg(char *str, t_game *game);
 void	free_game(t_game *game);
 void	free_array(char **str);
+
+// EXECUTOR
+int		init_engine(t_game *game);
 
 #endif

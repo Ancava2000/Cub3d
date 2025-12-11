@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: azibechi <azibechi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:41:17 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/08 11:45:23 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/11 19:30:33 by azibechi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	free_array(char **str)
 {
 	int	i;
 
+	if (!str)
+		return ;
 	i = 0;
 	while (str[i] != NULL)
 	{
@@ -62,20 +64,20 @@ void	free_game(t_game *game)
 		free_data(game->data);
 	if (game->texture)
 		free_list(game->texture);
-	if (game->image_no.ptr)
-		mlx_destroy_image(game->mlx, game->image_no.ptr);
-	if (game->image_so.ptr)
-		mlx_destroy_image(game->mlx, game->image_so.ptr);
-	if (game->image_ea.ptr)
-		mlx_destroy_image(game->mlx, game->image_ea.ptr);
-	if (game->image_we.ptr)
-		mlx_destroy_image(game->mlx, game->image_we.ptr);
-	if (game->image)
-		mlx_destroy_image(game->mlx, game->image);
-	if (game->window)
-		mlx_destroy_window(game->mlx, game->window);
 	if (game->mlx)
-		mlx_destroy_display(game->mlx);
+	{
+		if (game->image_no.ptr)
+			mlx_delete_image(game->mlx, game->image_no.ptr);
+		if (game->image_so.ptr)
+			mlx_delete_image(game->mlx, game->image_so.ptr);
+		if (game->image_ea.ptr)
+			mlx_delete_image(game->mlx, game->image_ea.ptr);
+		if (game->image_we.ptr)
+			mlx_delete_image(game->mlx, game->image_we.ptr);
+		if (game->image)
+			mlx_delete_image(game->mlx, game->image);
+		mlx_terminate(game->mlx);
+	}
 	free(game);
 }
 
