@@ -6,7 +6,7 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:44:52 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/11 18:03:40 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/14 15:17:23 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct s_data
 	char		*line; // each line of the .cub with get_next_line
 	char		*line_copy;
 	char		**map_array;
+	int			map_height;
 	char		*textures_line; // a string with all the textures
 	char		**textures_split; // all the textures split by '\0'
 	t_count		*count;
@@ -137,6 +138,7 @@ int		parse_colors(t_game *game);
 int		process_texture_lines(t_game *game, int *count);
 int		check_text_name(char *line);
 int		check_open_path(char *path);
+int		parse_map(t_game *game, char *map_path);
 
 // PARSE CREATE LISTS
 int		list_textures(t_game *game);

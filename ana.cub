@@ -3,8 +3,12 @@ SO ./src/textures/texture.xpm
 WE ./src/textures/texture.xpm
 
 
-F    222,    280  ,   100     
+F    222,    230  ,   100     
 C    222,    3  ,  100			      
 EA            ./src/textures/texture.xpm
 
-1111
+                     11111111111
+                     10000000001
+                     10000000001
+         1111111111  10000000001
+         1000000001  10000000001

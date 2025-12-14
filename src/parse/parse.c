@@ -6,7 +6,7 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:51:38 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/10 15:12:53 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/14 15:17:50 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	parse(char **av, t_game *game)
 		return (-1);
 	if (parse_colors(game))
 		return (-1);
-//	if (parse_map())
-//		return (-1);
+	if (parse_map(game, av[1]))
+		return (-1);
 	close(game->data->fd);
 	if (list_textures(game))
 		return (-1);
