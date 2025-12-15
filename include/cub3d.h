@@ -6,7 +6,7 @@
 /*   By: azibechi <azibechi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:44:52 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/11 19:17:09 by azibechi         ###   ########.fr       */
+/*   Updated: 2025/12/15 19:26:05 by azibechi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <ctype.h>
 # include <stdio.h>
+# include <math.h>
 # include "MLX42/include/MLX42/MLX42.h"
 # include "libft/libft.h"
 
@@ -37,8 +38,8 @@ typedef struct s_axis
 typedef struct s_player
 {
 	t_axis	pos;
-	double	dir;
-	double	actul_rot;
+	t_axis	dir;
+	t_axis	plane;
 	double	rot_speed;
 	double	move_speed;
 }			t_player;
@@ -130,7 +131,7 @@ typedef struct s_game
 	t_ray		raycasting;
 	void		*mlx;
 	void		*window;
-	void		*image; // to create a canvas
+	mlx_image_t	*image; // to create a canvas
 }	t_game;
 
 // PARSE GENERAL

@@ -6,7 +6,7 @@
 /*   By: azibechi <azibechi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:38:07 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/11 17:50:50 by azibechi         ###   ########.fr       */
+/*   Updated: 2025/12/15 19:28:26 by azibechi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,16 @@ int	main(int ac, char **av)
 		return (ft_error_msg("Error allocating memory for data\n", game));
 	if (init_parse(game))
 		return (-1);
-	if (check_args(ac, av, game))
+	(void)ac;
+	(void)av;
+/* 	if (check_args(ac, av, game))
 		return (-1);
 	if (parse(av, game))
 		return (-1);   
 	print_textures_raw(game);
     print_textures_split(game);
     print_texture_list(game);
-    print_colors(game);
+    print_colors(game); */
 	init_engine(game);
 	free_game(game);
 	return (0);
