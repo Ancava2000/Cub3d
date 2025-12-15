@@ -6,7 +6,7 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 11:44:26 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/15 12:40:56 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/15 12:26:05 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,12 @@ int	parse_player(t_game *game)
 		while (game->data->map_array[i][j])
 		{
 			if (ft_strchr("NSEW", game->data->map_array[i][j]))
+			{
 				count++;
+				game->player.pos_x = j + 0.5;
+				game->player.pos_y = i + 0.5;
+				game->player.dir = game->data->map_array[i][j];
+			}
 			j++;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:52:58 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/15 12:41:29 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/15 13:34:42 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,7 @@ int	parse_map(t_game *game, char *map_path)
 		return (ft_error_msg("Error: wrong elements\n", game));
 	if (parse_player(game))
 		return (ft_error_msg("Error with number of players\n", game));
+	if (parse_open(game))
+		return (ft_error_msg("Error: map is not closed\n", game));
 	return (0);
 }

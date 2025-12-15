@@ -19,6 +19,7 @@ SRC = $(SRCDIR)/main.c \
 		$(SRCDIR)/parse/list_colors.c \
 		$(SRCDIR)/parse/parse_map.c \
 		$(SRCDIR)/parse/parse_map_utils.c \
+		$(SRCDIR)/parse/parse_floor.c \
 		$(SRCDIR)/error_msg.c
 
 OBJ_DIR			= $(SRCDIR)/obj
