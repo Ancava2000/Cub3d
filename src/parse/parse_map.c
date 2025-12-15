@@ -6,7 +6,7 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:52:58 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/14 16:28:15 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/15 12:41:29 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ int	is_empty_line(char *line)
 	return (1);
 }
 
+// Count number of rows to allocate with malloc
+// Check empty line in the middle or at the end
+// Notice that the fd is now at the end, need to reopen.
 int	count_height(t_game *game)
 {
 	char	*line;
@@ -52,6 +55,8 @@ int	count_height(t_game *game)
 	return (0);
 }
 
+// Open again the map. Check for old lines and free.
+// Again get next line until map.
 int	reopen(t_game *game, char *map_path)
 {
 	char	*trimmed;
@@ -74,6 +79,7 @@ int	reopen(t_game *game, char *map_path)
 	return (0);
 }
 
+// Fill map with new fd and line.
 void	fill_map(t_game *game)
 {
 	int	i;
@@ -89,6 +95,7 @@ void	fill_map(t_game *game)
 	game->data->map_array[i] = NULL;
 }
 
+// Read, allocate and fill map. All parse map functions
 int	parse_map(t_game *game, char *map_path)
 {
 	if (count_height(game))
@@ -100,5 +107,9 @@ int	parse_map(t_game *game, char *map_path)
 	if (!game->data->map_array)
 		return (ft_error_msg("Error allocating memory for map_array\n", game));
 	fill_map(game);
+	if (parse_chars(game))
+		return (ft_error_msg("Error: wrong elements\n", game));
+	if (parse_player(game))
+		return (ft_error_msg("Error with number of players\n", game));
 	return (0);
 }

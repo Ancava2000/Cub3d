@@ -6,7 +6,7 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:52:14 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/11 18:50:57 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/15 13:04:17 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ int	check_path(char **textures)
 	{
 		line = textures[i];
 		if (*line == 'F' || *line == 'C')
+		{
 			i++;
+			continue ;
+		}
 		if (!ft_strncmp(line, "NO", 2) || !ft_strncmp(line, "SO", 2)
 			|| !ft_strncmp(line, "WE", 2) || !ft_strncmp(line, "EA", 2))
 		{
@@ -69,6 +72,8 @@ int	textures_split(t_game *game)
 
 	i = 0;
 	game->data->textures_split = ft_split(game->data->textures_line, '\n');
+	free(game->data->textures_line); // free due to not being used
+	game->data->textures_line = NULL;  // avoids a double free
 	textures_split = game->data->textures_split;
 	while (textures_split[i])
 	{

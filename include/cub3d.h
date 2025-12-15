@@ -6,7 +6,7 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:44:52 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/14 15:17:23 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/15 12:38:50 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,8 @@ int		process_texture_lines(t_game *game, int *count);
 int		check_text_name(char *line);
 int		check_open_path(char *path);
 int		parse_map(t_game *game, char *map_path);
+int		parse_chars(t_game *game);
+int		parse_player(t_game *game);
 
 // PARSE CREATE LISTS
 int		list_textures(t_game *game);
