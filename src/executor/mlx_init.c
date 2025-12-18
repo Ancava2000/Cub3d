@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: azibechi <azibechi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:37:11 by azibechi          #+#    #+#             */
-/*   Updated: 2025/12/17 00:09:44 by marvin           ###   ########.fr       */
+/*   Updated: 2025/12/18 20:28:38 by azibechi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int	init_engine(t_game *game)
 		return (ft_error_msg("mlx_new_image failed\n", game));
 	if (mlx_image_to_window(game->mlx, game->image, 0, 0) == -1)
 		return (ft_error_msg("mlx_image_to_window failed\n", game));
+	init_player_provisional(game);
 	mlx_loop_hook(game->mlx, &ft_hooks, game);
 	mlx_loop_hook(game->mlx, &game_loop, game);
 	mlx_loop(game->mlx);
-	init_player_provisional(game);
 	return (0);
 }
