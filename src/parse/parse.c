@@ -6,14 +6,14 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:51:38 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/15 11:24:36 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/18 13:27:25 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
 // open the map and save the first line
-int	read_map(char *av, t_game *game)
+int	read_fd(char *av, t_game *game)
 {
 	game->data->fd = open(av, O_RDONLY);
 	if (game->data->fd == -1)
@@ -29,7 +29,7 @@ int	read_map(char *av, t_game *game)
 
 int	parse(char **av, t_game *game)
 {
-	if (read_map(av[1], game))
+	if (read_fd(av[1], game))
 		return (-1);
 	if (parse_textures(game))
 		return (-1);
