@@ -6,7 +6,7 @@
 /*   By: azibechi <azibechi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:41:17 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/11 19:30:33 by azibechi         ###   ########.fr       */
+/*   Updated: 2025/12/18 20:34:27 by azibechi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	free_data(t_data *data)
 		free(data->line);
 	if (data->line_copy)
 		free(data->line_copy);
+	if (data->textures_line)
+		free(data->textures_line);
 	if (data->map_array)
 		free_array(data->map_array);
 	if (data->textures_split)
@@ -85,6 +87,9 @@ int	ft_error_msg(char *str, t_game *game)
 {
 	write(2, str, ft_strlen(str));
 	if (game)
+	{
+		get_next_line(-1);  // clean all the buffer (show leak in valgrind)
 		free_game(game);
+	}
 	return (1);
 }

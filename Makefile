@@ -18,6 +18,8 @@ SRC = $(SRCDIR)/main.c \
 		$(SRCDIR)/parse/parse_colors.c \
 		$(SRCDIR)/parse/list_textures.c \
 		$(SRCDIR)/parse/list_colors.c \
+		$(SRCDIR)/parse/parse_map.c \
+		$(SRCDIR)/parse/parse_map_utils.c \
 		$(SRCDIR)/executor/mlx_init.c \
 		$(SRCDIR)/error_msg.c
 

@@ -3,19 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: azibechi <azibechi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:38:07 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/17 00:11:35 by marvin           ###   ########.fr       */
+/*   Updated: 2025/12/18 20:35:59 by azibechi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+/*
 void	print_textures_raw(t_game *game)
 {
     printf("\n=== TEXTURES_LINE (raw string) ===\n");
     printf("'%s'\n", game->data->textures_line);
+}
+*/
+void	print_map(t_game *game)
+{
+    int i = 0;
+    
+    printf("\n=== MAP ===\n");
+    while (game->data->map_array[i])
+    {
+        printf("[%d]: %s", i, game->data->map_array[i]);
+        i++;
+    }
 }
 
 void	print_textures_split(t_game *game)
@@ -25,7 +38,7 @@ void	print_textures_split(t_game *game)
     printf("\n=== TEXTURES_SPLIT (array after split) ===\n");
     while (game->data->textures_split[i])
     {
-        printf("[%d]: '%s'\n", i, game->data->textures_split[i]);
+        printf("[%d]: %s\n", i, game->data->textures_split[i]);
         i++;
     }
 }
@@ -61,6 +74,7 @@ int	init_parse(t_game *game)
 	game->data->fd = -1;
 	game->data->line = NULL;
 	game->data->map_array = NULL;
+	game->data->map_height = 0;
 	game->data->textures_line = ft_strdup("");
 	game->data->textures_split = NULL;
 	game->data->count = ft_calloc(1, sizeof(t_count));
@@ -102,11 +116,13 @@ int	main(int ac, char **av)
 		return (-1);
 	if (parse(av, game))
 		return (-1);   
-	print_textures_raw(game);
+	//print_textures_raw(game);
     print_textures_split(game);
     print_texture_list(game);
     print_colors(game); */
 	init_engine(game);
+	print_map(game);
+	printf("\n\n%d\n", game->data->map_height);
 	free_game(game);
 	return (0);
 }

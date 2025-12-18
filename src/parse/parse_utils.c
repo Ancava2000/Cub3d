@@ -6,11 +6,22 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 14:21:45 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/10 16:52:25 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/15 11:28:37 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+int	check_open_path(char *path)
+{
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (1);
+	close(fd);
+	return (0);
+}
 
 // Proccess the line, skipping the spaces or tabs and adding a '\n'.
 // When the line starts with the texture name it is added to the texture_line via a temp variable.

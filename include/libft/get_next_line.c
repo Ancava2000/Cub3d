@@ -6,7 +6,7 @@
 /*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:09:29 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/10 16:39:08 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/11 18:46:20 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*buffer_copy(char *buffer)
 		return (0);
 	while (buffer[i] != '\n' && buffer[i] != '\0')
 		i++;
-	line = ft_calloc_gnl((i + 1), sizeof(char));
+	line = ft_calloc_gnl((i + 2), sizeof(char));
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
 	{
