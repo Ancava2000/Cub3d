@@ -1,7 +1,7 @@
-NO ./src/textures/texture.xpm
-SO ./src/textures/texture.xpm
-WE ./src/textures/texture.xpm
-EA ./src/textures/texture.xpm
+NO ./src/textures/boca.png
+SO ./src/textures/boca.png
+WE ./src/textures/boca.png
+EA ./src/textures/boca.png
 
 F 220,100,0
 C 225,30,255

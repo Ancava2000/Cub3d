@@ -6,7 +6,7 @@
 /*   By: azibechi <azibechi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:38:07 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/18 20:35:59 by azibechi         ###   ########.fr       */
+/*   Updated: 2025/12/18 22:35:08 by azibechi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,14 +112,13 @@ int	main(int ac, char **av)
 		return (-1);
 	(void)ac;
 	(void)av;
-/* 	if (check_args(ac, av, game))
+ 	if (check_args(ac, av, game))
 		return (-1);
 	if (parse(av, game))
 		return (-1);   
-	//print_textures_raw(game);
     print_textures_split(game);
     print_texture_list(game);
-    print_colors(game); */
+    print_colors(game);
 	init_engine(game);
 	print_map(game);
 	printf("\n\n%d\n", game->data->map_height);

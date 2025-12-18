@@ -21,6 +21,7 @@ SRC = $(SRCDIR)/main.c \
 		$(SRCDIR)/parse/parse_map.c \
 		$(SRCDIR)/parse/parse_map_utils.c \
 		$(SRCDIR)/executor/mlx_init.c \
+		$(SRCDIR)/executor/raycast.c \
 		$(SRCDIR)/error_msg.c
 
 OBJ_DIR			= $(SRCDIR)/obj

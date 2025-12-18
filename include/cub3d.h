@@ -6,7 +6,7 @@
 /*   By: azibechi <azibechi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:44:52 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/18 20:35:03 by azibechi         ###   ########.fr       */
+/*   Updated: 2025/12/18 21:45:44 by azibechi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define TITLE "cub3D"
 # define WIDTH 1920
 # define HEIGHT 1080
+# define MOVE_SPEED 0.05
+# define ROT_SPEED 0.03
 
 typedef struct s_axis
 {
@@ -37,6 +39,7 @@ typedef struct s_axis
 // struct player (position(x y), rot speed, move speed, direction(x y), camera x y)
 typedef struct s_player
 {
+	char	dir_name;
 	t_axis	pos;
 	t_axis	dir;
 	t_axis	plane;
@@ -119,20 +122,21 @@ typedef struct s_data
 // struct game with all structs (all data (textures paths), player, movements, all images, image mlx, mlx, window)
 typedef struct s_game
 {
-	t_data		*data;
-	t_texture	*texture;
-	t_color		floor;
-	t_color		ceiling;
-	t_image		image_no;
-	t_image		image_so;
-	t_image		image_we;
-	t_image		image_ea;
-	t_player	player;
-	t_moves		movements;
-	t_ray		raycasting;
-	void		*mlx;
-	void		*window;
-	mlx_image_t	*image; // to create a canvas
+	t_data			*data;
+	t_texture		*texture;
+	t_color			floor;
+	t_color			ceiling;
+    mlx_texture_t   *tex_north;
+    mlx_texture_t   *tex_south;
+    mlx_texture_t   *tex_west;
+    mlx_texture_t   *tex_east;
+	t_player		
+	player;
+	t_moves			movements;
+	t_ray			raycasting;
+	void			*mlx;
+	void			*window;
+	mlx_image_t		*image; // to create a canvas
 }	t_game;
 
 // PARSE GENERAL
@@ -157,6 +161,8 @@ void	free_game(t_game *game);
 void	free_array(char **str);
 
 // EXECUTOR
-int		init_engine(t_game *game);
+int			init_engine(t_game *game);
+void		raycasting(t_game *game);
+uint32_t 	get_tex_pixel(mlx_texture_t *tex, int x, int y);
 
 #endif

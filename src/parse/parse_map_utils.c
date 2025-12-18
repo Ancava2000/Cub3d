@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: azibechi <azibechi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 11:44:26 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/18 13:28:24 by acarro-v         ###   ########.fr       */
+/*   Updated: 2025/12/18 22:34:45 by azibechi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,31 +34,32 @@ int	parse_chars(t_game *game)
 
 int	parse_player(t_game *game)
 {
-	int	i;
-	int	j;
-	int	count;
+    int	i;
+    int	j;
+    int	count;
 
-	i = 0;
-	count = 0;
-	while (game->data->map_array[i])
-	{
-		j = 0;
-		while (game->data->map_array[i][j])
-		{
-			if (ft_strchr("NSEW", game->data->map_array[i][j]))
-			{
-				count++;
-				game->player.pos_x = j + 0.5;
-				game->player.pos_y = i + 0.5;
-				game->player.dir = game->data->map_array[i][j];
+    i = 0;
+    count = 0;
+    while (game->data->map_array[i])
+    {
+        j = 0;
+        while (game->data->map_array[i][j])
+        {
+            if (ft_strchr("NSEW", game->data->map_array[i][j]))
+            {
+                count++;
+                game->player.pos.x = j + 0.5;
+                game->player.pos.y = i + 0.5;
+                game->player.dir_name = game->data->map_array[i][j];
 			}
-			j++;
-		}
-		i++;
-	}
-	if (count != 1)
-		return (1);
-	return (0);
+            j++;
+        }
+        i++;
+    }
+    if (count != 1)
+    {        return (1);
+    }
+    return (0);
 }
 
 int	check_open(t_game *game, int x, int y)
