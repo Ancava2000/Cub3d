@@ -1,10 +1,10 @@
-NO ./src/textures/boca.png
-SO ./src/textures/ravioles.png
-WE ./src/textures/boca.png
-EA ./src/textures/ravioles.png
+NO ./src/textures/madera1.png
+SO ./src/textures/madera2.png
+WE ./src/textures/madera3.png
+EA ./src/textures/madera4.png
 
-F 220,100,0
-C 225,30,255
+F 51,32,9
+C 27,14,88
 
         1111111111111111111111111
         1000000000110000000000001

@@ -1,4 +1,9 @@
+# Colors
+# ------
 HOT_PINK			=	\033[38;5;169m
+ITALIC =		\033[3m
+BOLD =			\033[1m
+DEF_COLOR =		\033[0;39m
 
 NAME = cub3D
 
@@ -53,11 +58,12 @@ $(NAME): $(OBJ) $(LIBFT) $(MLX)
 	@echo
 
 $(LIBFT):
+	@echo "$(HOT_PINK)$(BOLD) Compiling libft...$(DEF_COLOR)"
 	@make -C $(LIBFTDIR)
+	@echo "$(HOT_PINK)$(BOLD) libft.a and OBJS created ✓$(DEF_COLOR)"
 
 $(MLX):
-	@cmake -B $(MLXDIR)/build $(MLXDIR) > /dev/null 2>&1
-	@cmake --build $(MLXDIR)/build -j4 > /dev/null 2>&1
+	@make -C MLX42/build/
 
 clean:
 	@make clean -C $(LIBFTDIR)
