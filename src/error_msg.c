@@ -68,14 +68,6 @@ void	free_game(t_game *game)
 		free_list(game->texture);
 	if (game->mlx)
 	{
-		if (game->image_no.ptr)
-			mlx_delete_image(game->mlx, game->image_no.ptr);
-		if (game->image_so.ptr)
-			mlx_delete_image(game->mlx, game->image_so.ptr);
-		if (game->image_ea.ptr)
-			mlx_delete_image(game->mlx, game->image_ea.ptr);
-		if (game->image_we.ptr)
-			mlx_delete_image(game->mlx, game->image_we.ptr);
 		if (game->image)
 			mlx_delete_image(game->mlx, game->image);
 		mlx_terminate(game->mlx);
