@@ -1,3 +1,7 @@
+ITALIC =		\033[3m
+DEF_COLOR =		\033[0;39m
+CYAN_2 =        \033[38;5;50m
+
 NAME			= libft.a
 
 SRC = ft_atoi.c \
@@ -67,8 +71,8 @@ all:			$(NAME)
 
 $(NAME):		$(OBJS)
 				@ar rcs $(NAME) $(OBJS)
-				@echo "Obj dir created!"
-				@echo "$(NAME) created!"
+				@echo "$(CYAN_2)$(ITALIC)Obj dir created!$(DEF_COLOR)"
+				@echo "$(CYAN_2)$(ITALIC)$(NAME) created!$(DEF_COLOR)"
 
 bonus:			$(NAME) $(OBJS) $(BOBJS)
 					@ar rcs $(NAME) $(OBJS) $(BOBJS)
@@ -76,11 +80,11 @@ bonus:			$(NAME) $(OBJS) $(BOBJS)
 
 clean:
 				@$(RM) $(OBJ_DIR)
-				@echo "Obj dir clean!"
+				@echo "$(CYAN_2)$(ITALIC)Obj dir libft clean!$(DEF_COLOR)"
 
 fclean:			clean
 				@$(RM) $(NAME)
-				@echo "$(NAME) clean!"
+				@echo "$(CYAN_2)$(ITALIC)$(NAME) clean!$(DEF_COLOR)"
 
 re:				fclean all
 
