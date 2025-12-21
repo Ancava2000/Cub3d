@@ -88,7 +88,7 @@ int	ft_error_msg(char *str, t_game *game)
 	write(2, str, ft_strlen(str));
 	if (game)
 	{
-		get_next_line(-1);  // clean all the buffer (show leak in valgrind)
+		get_next_line(-1);// clean all the buffer (show leak in valgrind)
 		free_game(game);
 	}
 	return (1);

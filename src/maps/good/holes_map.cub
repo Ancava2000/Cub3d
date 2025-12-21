@@ -1,10 +1,18 @@
-NO ./src/textures/madera1.png
-SO ./src/textures/madera2.png
-WE ./src/textures/madera3.png
+
+
+NO          ./src/textures/madera1.png
+SO    ./src/textures/madera2.png
+
+
+F    220,  100,0
+
+
+WE 			./src/textures/madera3.png
 EA ./src/textures/madera4.png
 
-F 220,100,0
-C 225,30,255
+
+
+C 225 ,  30,255
 
             11111111111
             10000000001

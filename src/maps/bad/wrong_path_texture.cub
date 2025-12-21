@@ -1,7 +1,7 @@
-NO ./src/textures/texture.xpm
-SO ./src/textures/texture.xpm
-WE ./src/textures/texture.xpm
-EA ./src/textures/texture.xp
+NO ./src/textures/madera1.png
+SO ./src/textures/madera2.png
+WE ./src/textures/madera3.png
+EA ./src/textures/madera4.pn
 
 F 220,100,0
 C 225,30,255

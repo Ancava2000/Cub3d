@@ -12,9 +12,6 @@
 
 #include "../../include/cub3d.h"
 
-// change check format to check_direction. I only have to check if I can open the path
-// I don't need to check for ./ because it can change or if the path ends with .xpm
-
 int	check_path(char **textures)
 {
 	int		i;
@@ -25,13 +22,7 @@ int	check_path(char **textures)
 	while (textures[i])
 	{
 		line = textures[i];
-		if (*line == 'F' || *line == 'C')
-		{
-			i++;
-			continue ;
-		}
-		if (!ft_strncmp(line, "NO", 2) || !ft_strncmp(line, "SO", 2)
-			|| !ft_strncmp(line, "WE", 2) || !ft_strncmp(line, "EA", 2))
+		if (*line != 'F' && *line != 'C' && is_dir_token(line))
 		{
 			line += 2;
 			while (ft_isspace(*line))
@@ -72,8 +63,8 @@ int	textures_split(t_game *game)
 
 	i = 0;
 	game->data->textures_split = ft_split(game->data->textures_line, '\n');
-	free(game->data->textures_line); // free due to not being used
-	game->data->textures_line = NULL;  // avoids a double free
+	free(game->data->textures_line);// free due to not being used
+	game->data->textures_line = NULL;// avoids a double free
 	textures_split = game->data->textures_split;
 	while (textures_split[i])
 	{
@@ -112,39 +103,3 @@ int	parse_textures(t_game *game)
 		return (1);
 	return (0);
 }
-
-/*
-int	parse_textures(t_game *game)
-{
-	int		count;
-	char	*temp_texture;
-	char	*line_with_newline;
-	char	*line;
-
-	count = 0;
-	while (game->data->line)
-	{
-		line = ft_skipspace(game->data->line);
-		if (line[0] == '1' || line[0] == ' ')
-			break ;
-		if (check_text_name(line))
-		{
-			line_with_newline = ft_strjoin(line, "\n");
-			temp_texture = ft_strjoin(game->data->textures_line, line_with_newline);
-			free(line_with_newline);
-			free(game->data->textures_line);
-			game->data->textures_line = temp_texture;
-			count++;
-		}
-		free(game->data->line);
-		game->data->line = get_next_line(game->data->fd);
-	}
-	if (!game->data->line)
-		return (ft_error_msg("Error no map found\n", game));
-	if (count != 6)
-		return (ft_error_msg("Error with number of textures\n", game));
-	if (textures_split(game))
-		return (1);
-	return (0);
-}
-*/

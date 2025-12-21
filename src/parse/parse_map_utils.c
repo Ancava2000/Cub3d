@@ -71,8 +71,8 @@ int	check_open(t_game *game, int x, int y)
 		return (1);
 	row = game->data->map_array[x];
 	width = (int)ft_strlen(row);
-	while (width > 0 && (row[width - 1] == '\n' || row[width - 1] == ' ' 
-		|| row[width - 1] == '\t'))
+	while (width > 0 && (row[width - 1] == '\n' || row[width - 1] == ' '
+			|| row[width - 1] == '\t'))
 		width--;
 	if (y < 0 || y >= width)
 		return (1);

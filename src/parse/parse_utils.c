@@ -12,6 +12,13 @@
 
 #include "../../include/cub3d.h"
 
+int	is_dir_token(const char *line)
+{
+	return (!ft_strncmp(line, "NO", 2) || !ft_strncmp(line, "SO", 2)
+		|| !ft_strncmp(line, "WE", 2) || !ft_strncmp(line, "EA", 2));
+}
+
+
 int	check_open_path(char *path)
 {
 	int	fd;
@@ -29,7 +36,7 @@ int	check_open_path(char *path)
 int	process_texture_lines(t_game *game, int *count)
 {
 	char	*temp_texture;
-	char	*line; // line without spaces at the start
+	char	*line;
 
 	while (game->data->line)
 	{

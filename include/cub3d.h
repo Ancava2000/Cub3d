@@ -144,6 +144,7 @@ int		parse_textures(t_game *game);
 int		parse_colors(t_game *game);
 int		process_texture_lines(t_game *game, int *count);
 int		check_text_name(char *line);
+int		is_dir_token(const char *line);
 int		check_open_path(char *path);
 int		parse_map(t_game *game, char *map_path);
 int		parse_chars(t_game *game);

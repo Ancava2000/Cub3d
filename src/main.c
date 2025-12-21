@@ -108,10 +108,10 @@ int	main(int ac, char **av)
 	if (check_args(ac, av, game))
 		return (-1);
 	if (parse(av, game))
-		return (-1);   
-    print_textures_split(game);
-    print_texture_list(game);
-    print_colors(game);
+		return (-1);
+	print_textures_split(game);
+	print_texture_list(game);
+	print_colors(game);
 	print_map(game);
 	init_engine(game);
 	printf("\n\n%d\n", game->data->map_height);
