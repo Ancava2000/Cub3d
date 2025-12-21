@@ -12,13 +12,6 @@
 
 #include "../include/cub3d.h"
 
-/*
-void	print_textures_raw(t_game *game)
-{
-    printf("\n=== TEXTURES_LINE (raw string) ===\n");
-    printf("'%s'\n", game->data->textures_line);
-}
-*/
 void	print_map(t_game *game)
 {
     int i = 0;
@@ -112,15 +105,15 @@ int	main(int ac, char **av)
 		return (-1);
 	(void)ac;
 	(void)av;
- 	if (check_args(ac, av, game))
+	if (check_args(ac, av, game))
 		return (-1);
 	if (parse(av, game))
 		return (-1);   
     print_textures_split(game);
     print_texture_list(game);
     print_colors(game);
-	init_engine(game);
 	print_map(game);
+	init_engine(game);
 	printf("\n\n%d\n", game->data->map_height);
 	free_game(game);
 	return (0);

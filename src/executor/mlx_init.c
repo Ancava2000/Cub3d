@@ -62,7 +62,7 @@ static void	init_player(t_game *game)
 		game->player.dir.x = -1;
 	game->player.plane.x = -game->player.dir.y * 0.66;
 	game->player.plane.y = game->player.dir.x * 0.66;
-	printf("DEBUG: Player Pos: x=%f, y=%f\n", game->player.pos.x, game->player.pos.y);
+	printf("\nDEBUG: Player Pos: x=%f, y=%f\n", game->player.pos.x, game->player.pos.y);
 	int x = (int)game->player.pos.x;
 	int y = (int)game->player.pos.y;
 	game->data->map_array[y][x] = '0';

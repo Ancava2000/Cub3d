@@ -34,41 +34,49 @@ int	parse_chars(t_game *game)
 
 int	parse_player(t_game *game)
 {
-    int	i;
-    int	j;
-    int	count;
+	int	i;
+	int	j;
+	int	count;
 
-    i = 0;
-    count = 0;
-    while (game->data->map_array[i])
-    {
-        j = 0;
-        while (game->data->map_array[i][j])
-        {
-            if (ft_strchr("NSEW", game->data->map_array[i][j]))
-            {
-                count++;
-                game->player.pos.x = j + 0.5;
-                game->player.pos.y = i + 0.5;
-                game->player.dir_name = game->data->map_array[i][j];
+	i = 0;
+	count = 0;
+	while (game->data->map_array[i])
+	{
+		j = 0;
+		while (game->data->map_array[i][j])
+		{
+			if (ft_strchr("NSEW", game->data->map_array[i][j]))
+			{
+				count++;
+				game->player.pos.x = j + 0.5;
+				game->player.pos.y = i + 0.5;
+				game->player.dir_name = game->data->map_array[i][j];
 			}
-            j++;
-        }
-        i++;
-    }
-    if (count != 1)
-    {        return (1);
-    }
-    return (0);
+			j++;
+		}
+		i++;
+	}
+	if (count != 1)
+		return (1);
+	return (0);
 }
 
 int	check_open(t_game *game, int x, int y)
 {
+	char	*row;
+	int		width;
 	char	square;
 
-	if (x < 0 || y < 0)
+	if (x < 0 || x >= game->data->map_height)
 		return (1);
-	square = game->data->map_array[x][y];
+	row = game->data->map_array[x];
+	width = (int)ft_strlen(row);
+	while (width > 0 && (row[width - 1] == '\n' || row[width - 1] == ' ' 
+		|| row[width - 1] == '\t'))
+		width--;
+	if (y < 0 || y >= width)
+		return (1);
+	square = row[y];
 	if (square == ' ')
 		return (1);
 	return (0);

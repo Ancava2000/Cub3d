@@ -84,7 +84,7 @@ $(MLX):
 # -------
 
 # Clean
-# -------make 
+# -------
 clean:
 	@make clean -C $(LIBFTDIR)
 	@rm -rf $(OBJ_DIR)

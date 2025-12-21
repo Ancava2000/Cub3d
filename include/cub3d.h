@@ -130,8 +130,7 @@ typedef struct s_game
     mlx_texture_t   *tex_south;
     mlx_texture_t   *tex_west;
     mlx_texture_t   *tex_east;
-	t_player		
-	player;
+	t_player		player;
 	t_moves			movements;
 	t_ray			raycasting;
 	void			*mlx;

@@ -57,6 +57,8 @@ void	free_data(t_data *data)
 		free_array(data->textures_split);
 	if (data->count)
 		free(data->count);
+	if (data->fd >= 0)
+		close(data->fd);
 	free(data);
 }
 
@@ -66,12 +68,18 @@ void	free_game(t_game *game)
 		free_data(game->data);
 	if (game->texture)
 		free_list(game->texture);
+	if (game->image)
+		mlx_delete_image(game->mlx, game->image);
+	if (game->tex_north)
+		mlx_delete_texture(game->tex_north);
+	if (game->tex_south)
+		mlx_delete_texture(game->tex_south);
+	if (game->tex_west)
+		mlx_delete_texture(game->tex_west);
+	if (game->tex_east)
+		mlx_delete_texture(game->tex_east);
 	if (game->mlx)
-	{
-		if (game->image)
-			mlx_delete_image(game->mlx, game->image);
 		mlx_terminate(game->mlx);
-	}
 	free(game);
 }
 
