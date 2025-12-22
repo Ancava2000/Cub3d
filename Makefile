@@ -13,7 +13,7 @@ CFLAGS = -Wall -Wextra -Werror -g -I$(INCDIR)/MLX42/include
 LDFLAGS = -L$(MLXDIR)/build -lmlx42 -lglfw -ldl -lm -pthread
 # -------
 
-# Directories
+# Directories and libraries
 # -------
 SRCDIR = src
 INCDIR = include
@@ -80,20 +80,23 @@ $(LIBFT):
 # MLX42 compilation
 # -------
 $(MLX):
-	@make -C $(MLXDIR)
+	@make -C MLX42/build/
 # -------
 
 # Clean
 # -------
 clean:
-	@make clean -C $(LIBFTDIR)
+	@echo "$(HOT_PINK)$(BOLD) Removing obj dir of cub3d and cub3d!$(DEF_COLOR)"
 	@rm -rf $(OBJ_DIR)
-	@echo "$(HOT_PINK)$(BOLD)Obj dir cub3d clean!$(DEF_COLOR)"
+	@rm -f $(NAME)
+	@echo "$(HOT_PINK)$(ITALIC) Libft OBJS deleted $(DEF_COLOR)"
+
 
 fclean: clean
-	@rm -f $(NAME)
+	@echo "$(HOT_PINK)$(BOLD) Removing .o and libft.a...$(DEF_COLOR)"
 	@make fclean -C $(LIBFTDIR)
-	@echo "$(HOT_PINK)$(BOLD)$(NAME) clean!$(DEF_COLOR)"
+	@echo "$(HOT_PINK)$(ITALIC) Libft OBJS deleted $(DEF_COLOR)"
+	@echo "$(HOT_PINK)$(ITALIC) all deleted D:$(DEF_COLOR)"
 
 re: fclean all
 

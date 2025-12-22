@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azibechi <azibechi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:41:17 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/18 20:34:27 by azibechi         ###   ########.fr       */
+/*   Updated: 2025/12/22 14:24:13 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,22 +64,24 @@ void	free_data(t_data *data)
 
 void	free_game(t_game *game)
 {
-	if (game->data)
-		free_data(game->data);
+	if (game->mlx)
+	{
+		if (game->image)
+			mlx_delete_image(game->mlx, game->image);
+		if (game->tex_north)
+			mlx_delete_texture(game->tex_north);;
+		if (game->tex_south)
+			mlx_delete_texture(game->tex_south);
+		if (game->tex_west)
+			mlx_delete_texture(game->tex_west);
+		if (game->tex_east)
+			mlx_delete_texture(game->tex_east);
+		mlx_terminate(game->mlx);
+	}
 	if (game->texture)
 		free_list(game->texture);
-	if (game->image)
-		mlx_delete_image(game->mlx, game->image);
-	if (game->tex_north)
-		mlx_delete_texture(game->tex_north);
-	if (game->tex_south)
-		mlx_delete_texture(game->tex_south);
-	if (game->tex_west)
-		mlx_delete_texture(game->tex_west);
-	if (game->tex_east)
-		mlx_delete_texture(game->tex_east);
-	if (game->mlx)
-		mlx_terminate(game->mlx);
+	if (game->data)
+		free_data(game->data);
 	free(game);
 }
 

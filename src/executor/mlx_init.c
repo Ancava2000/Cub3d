@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azibechi <azibechi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:37:11 by azibechi          #+#    #+#             */
-/*   Updated: 2025/12/18 22:28:56 by azibechi         ###   ########.fr       */
+/*   Updated: 2025/12/22 14:43:59 by acarro-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	game_loop(void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
+
 	ft_memset(game->image->pixels, 0, WIDTH * HEIGHT * sizeof(int32_t));
 	raycasting(game);
 }
@@ -88,10 +89,13 @@ void	ft_hooks(void *param)
     p = &game->player;
 
     // --- SALIR ---
-    if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
-        mlx_close_window(game->mlx);
-
-	    if (mlx_is_key_down(game->mlx, MLX_KEY_A))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))  // con el anterior de close window daba segmentation fault. Así se libera todo y hace terminate al final
+    {
+		get_next_line(-1);
+        free_game(game);
+        exit(0);  // Salir del programa inmediatamente
+    }
+	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
     {
         // Moverse en dirección negativa del plano (Izquierda)
         // Nota: A veces el vector plane apunta a la derecha, verifica el signo
@@ -193,6 +197,15 @@ void	load_game_textures(t_game *game)
     }
 }
 
+void close_hook(void *param)
+{
+    t_game *game = (t_game *)param;
+    
+    get_next_line(-1);
+    free_game(game);
+    exit(0);
+}
+
 int	init_engine(t_game *game)
 {
 	game->mlx = mlx_init(WIDTH, HEIGHT, TITLE, true);
@@ -208,6 +221,8 @@ int	init_engine(t_game *game)
 	// En init_engine, antes de mlx_loop:
 	mlx_loop_hook(game->mlx, &ft_hooks, game);
 	mlx_loop_hook(game->mlx, &game_loop, game);
+	mlx_close_hook(game->mlx, &close_hook, game);  //Igual que con esc pero al cerrar la ventana con la x
 	mlx_loop(game->mlx);
+	free_game(game);
 	return (0);
 }
