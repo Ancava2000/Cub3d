@@ -44,6 +44,8 @@ SRC = $(SRCDIR)/main.c \
 		$(SRCDIR)/parse/parse_map_utils.c \
 		$(SRCDIR)/executor/mlx_init.c \
 		$(SRCDIR)/executor/raycast.c \
+		$(SRCDIR)/executor/hooks.c \
+		$(SRCDIR)/executor/textures.c \
 		$(SRCDIR)/error_msg.c
 # -------
 

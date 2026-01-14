@@ -6,7 +6,7 @@
 /*   By: azibechi <azibechi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:38:07 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/18 22:35:08 by azibechi         ###   ########.fr       */
+/*   Updated: 2026/01/14 16:19:13 by azibechi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ void	print_texture_list(t_game *game)
     }
 }
 
-void	print_colors(t_game *game)
+/* void	print_colors(t_game *game)
 {
     printf("\n=== COLORS ===\n");
     printf("Ceiling: R=%d G=%d B=%d\n", 
         game->ceiling.r, game->ceiling.g, game->ceiling.b);
     printf("Floor:   R=%d G=%d B=%d\n", 
         game->floor.r, game->floor.g, game->floor.b);
-}
+} */
 
 // Init all the parse data
 int	init_parse(t_game *game)
@@ -111,7 +111,7 @@ int	main(int ac, char **av)
 		return (-1);
 	print_textures_split(game);
 	print_texture_list(game);
-	print_colors(game);
+//	print_colors(game);
 	print_map(game);
 	init_engine(game);
 	printf("\n\n%d\n", game->data->map_height);

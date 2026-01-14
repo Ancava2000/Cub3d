@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: azibechi <azibechi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:44:52 by acarro-v          #+#    #+#             */
-/*   Updated: 2026/01/12 16:24:56 by marvin           ###   ########.fr       */
+/*   Updated: 2026/01/14 19:17:10 by azibechi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,22 @@ typedef struct s_moves
 	bool	rigth;
 }			t_moves;
 
+/* typedef struct s_draw
+{
+
+}			 t_draw; */
+
 // struct raycasting (ray direction, x camera coordenate(calculate vector of the direction), )
 typedef struct s_ray
 {
+	int		x;
 	t_axis	ray_dir;
 	double	camera_x;
 	t_axis	delta_dist;
 	t_axis	side_dist;
 	t_axis	step;
+	int		map_x;
+	int		map_y;
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
@@ -75,7 +83,6 @@ typedef struct s_ray
 	double	wall_x;
 	int		tex_x;
 	int		tex_y;
-	
 }			t_ray;
 
 // images void * width and height(to use mlx_file_to_image)
@@ -101,9 +108,9 @@ typedef	struct s_count
 // struct color (r, g, b of floor and ceiling)
 typedef struct s_color
 {
-	int r;
-	int g;
-	int b;
+	int	r;
+	int	g;
+	int	b;
 }		t_color;
 
 // struct for textures: name(NO, SO,...) and path(./...)
@@ -136,52 +143,52 @@ typedef struct s_game
 	t_texture		*texture;
 	uint32_t		floor_color;
 	uint32_t		ceiling_color;
-    mlx_texture_t   *tex_north;
-    mlx_texture_t   *tex_south;
-    mlx_texture_t   *tex_west;
-    mlx_texture_t   *tex_east;
+	mlx_texture_t	*tex_north;
+	mlx_texture_t	*tex_south;
+	mlx_texture_t	*tex_west;
+	mlx_texture_t	*tex_east;
 	t_player		player;
 	t_moves			movements;
 	t_ray			raycasting;
+//	t_draw			draw;
 	void			*mlx;
 	void			*window;
 	mlx_image_t		*image; // to create a canvas
 }	t_game;
 
 // PARSE GENERAL
-int		parse(char **av, t_game *game);
-int		parse_textures(t_game *game);
-int		parse_colors(t_game *game);
-int		process_texture_lines(t_game *game, int *count);
-int		check_text_name(char *line);
-int		is_dir_token(const char *line);
-int		check_open_path(char *path);
-int		parse_map(t_game *game, char *map_path);
-int		parse_chars(t_game *game);
-int		parse_player(t_game *game);
-int		parse_open(t_game *game);
+int			parse(char **av, t_game *game);
+int			parse_textures(t_game *game);
+int			parse_colors(t_game *game);
+int			process_texture_lines(t_game *game, int *count);
+int			check_text_name(char *line);
+int			is_dir_token(const char *line);
+int			check_open_path(char *path);
+int			parse_map(t_game *game, char *map_path);
+int			parse_chars(t_game *game);
+int			parse_player(t_game *game);
+int			parse_open(t_game *game);
 
 // PARSE CREATE LISTS
-int		list_textures(t_game *game);
-int		list_colors(t_game *game);
+int			list_textures(t_game *game);
+int			list_colors(t_game *game);
 
 // ERRORS AND FREE
-int		ft_error_msg(char *str, t_game *game);
-void	free_game(t_game *game);
-void	free_array(char **str);
+int			ft_error_msg(char *str, t_game *game);
+void		free_game(t_game *game);
+void		free_array(char **str);
 
 // EXECUTOR
 int			init_engine(t_game *game);
 void		raycasting(t_game *game);
-uint32_t 	get_tex_pixel(mlx_texture_t *tex, int x, int y);
+uint32_t	get_tex_pixel(mlx_texture_t *tex, int x, int y);
 
 //HOOKS
-void		ft_hooks(void *param)
+void		ft_hooks(void *param);
 void		close_hook(void *param);
 
 // TEXTURES
 void		load_textures(t_game *game);
-void    	ft_print_tex(t_ray ray, t_game game, t_player p, mlx_texture_t tex);
-
+void		ft_print_tex(t_ray *r, t_game *g, mlx_texture_t *t);
 
 #endif
