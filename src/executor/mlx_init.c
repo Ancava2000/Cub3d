@@ -3,82 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:37:11 by azibechi          #+#    #+#             */
-/*   Updated: 2025/12/22 14:43:59 by acarro-v         ###   ########.fr       */
+/*   Updated: 2026/01/12 16:20:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-// Función auxiliar para obtener el pixel de una textura
-uint32_t get_tex_pixel(mlx_texture_t *tex, int x, int y)
-{
-    if (x < 0 || x >= (int)tex->width || y < 0 || y >= (int)tex->height)
-        return (0);
-    
-    // El array pixels es uint8_t [R, G, B, A, R, G, B, A...]
-    int index = (y * tex->width + x) * 4;
-    
-    uint8_t r = tex->pixels[index];
-    uint8_t g = tex->pixels[index + 1];
-    uint8_t b = tex->pixels[index + 2];
-    uint8_t a = tex->pixels[index + 3];
-    
-    // Combinar en uint32_t (RGBA para MLX42)
-    return ((r << 24) | (g << 16) | (b << 8) | a);
-}
-
-// Añade esto en init_engine
-void load_textures(t_game *game)
-{
-    // Rutas desde la raíz del proyecto (donde ejecutas ./cub3D)
-    game->tex_north = mlx_load_png("src/textures/boca.png");
-    game->tex_south = mlx_load_png("src/textures/ravioles.png");
-    game->tex_east = mlx_load_png("src/textures/boca.png");
-    game->tex_west = mlx_load_png("src/textures/boca.png");
-
-    if (!game->tex_north || !game->tex_south || !game->tex_east || !game->tex_west)
-    {
-        // Imprimir error detallado de MLX para saber qué falla
-        puts(mlx_strerror(mlx_errno));
-        ft_error_msg("Failed to load textures\n", game);
-        exit(1);
-    }
-}
-
-static void	init_player(t_game *game)
-{
-	game->player.dir.x = 0;
-	game->player.dir.y = 0;
-	if (game->player.dir_name == 'N')
-		game->player.dir.y = -1;
-	if (game->player.dir_name == 'S')
-		game->player.dir.y = 1;
-	if (game->player.dir_name == 'E')
-		game->player.dir.x = 1;
-	if (game->player.dir_name == 'W')
-		game->player.dir.x = -1;
-	game->player.plane.x = -game->player.dir.y * 0.66;
-	game->player.plane.y = game->player.dir.x * 0.66;
-	printf("\nDEBUG: Player Pos: x=%f, y=%f\n", game->player.pos.x, game->player.pos.y);
-	int x = (int)game->player.pos.x;
-	int y = (int)game->player.pos.y;
-	game->data->map_array[y][x] = '0';
-}
-
-void	game_loop(void *param)
-{
-	t_game	*game;
-
-	game = (t_game *)param;
-
-	ft_memset(game->image->pixels, 0, WIDTH * HEIGHT * sizeof(int32_t));
-	raycasting(game);
-}
-
-void	ft_hooks(void *param)
+/* void	ft_hooks(void *param)
 {
 	t_game		*game;
     t_player	*p;
@@ -141,7 +75,7 @@ void	ft_hooks(void *param)
             p->pos.x = new_x;
         if (game->data->map_array[(int)new_y][(int)p->pos.x] != '1')
             p->pos.y = new_y;
-    }
+    } 
     // ... Implementar A y D usando p->plane en vez de p->dir ...
 
     // --- ROTACIÓN (Flecha Derecha) ---
@@ -170,6 +104,38 @@ void	ft_hooks(void *param)
         p->plane.x = p->plane.x * cos(-ROT_SPEED) - p->plane.y * sin(-ROT_SPEED);
         p->plane.y = old_plane_x * sin(-ROT_SPEED) + p->plane.y * cos(-ROT_SPEED);
     }
+} */
+
+static void	init_player(t_game *game)
+{
+    int x;
+    int y;
+    
+	game->player.dir.x = 0;
+	game->player.dir.y = 0;
+	if (game->player.dir_name == 'N')
+		game->player.dir.y = -1;
+	if (game->player.dir_name == 'S')
+		game->player.dir.y = 1;
+	if (game->player.dir_name == 'E')
+		game->player.dir.x = 1;
+	if (game->player.dir_name == 'W')
+		game->player.dir.x = -1;
+	game->player.plane.x = -game->player.dir.y * 0.66;
+	game->player.plane.y = game->player.dir.x * 0.66;
+//	printf("\nDEBUG: Player Pos: x=%f, y=%f\n", game->player.pos.x, game->player.pos.y);
+	x = (int)game->player.pos.x;
+	y = (int)game->player.pos.y;
+	game->data->map_array[y][x] = '0';
+}
+
+void	game_loop(void *param)
+{
+	t_game	*game;
+
+	game = (t_game *)param;
+	ft_memset(game->image->pixels, 0, WIDTH * HEIGHT * sizeof(int32_t));
+	raycasting(game);
 }
 
 void	load_game_textures(t_game *game)
@@ -189,21 +155,11 @@ void	load_game_textures(t_game *game)
             game->tex_east = mlx_load_png(tmp->path);
         tmp = tmp->next;
     }
-    // Verificación de seguridad
     if (!game->tex_north || !game->tex_south || !game->tex_west || !game->tex_east)
     {
         ft_error_msg("Error: Could not load all textures (Check paths/PNG format)\n", game);
         exit(1);
     }
-}
-
-void close_hook(void *param)
-{
-    t_game *game = (t_game *)param;
-    
-    get_next_line(-1);
-    free_game(game);
-    exit(0);
 }
 
 int	init_engine(t_game *game)
@@ -218,10 +174,9 @@ int	init_engine(t_game *game)
 		return (ft_error_msg("mlx_image_to_window failed\n", game));
 	init_player(game);
 	load_game_textures(game);
-	// En init_engine, antes de mlx_loop:
 	mlx_loop_hook(game->mlx, &ft_hooks, game);
 	mlx_loop_hook(game->mlx, &game_loop, game);
-	mlx_close_hook(game->mlx, &close_hook, game);  //Igual que con esc pero al cerrar la ventana con la x
+	mlx_close_hook(game->mlx, &close_hook, game);
 	mlx_loop(game->mlx);
 	free_game(game);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azibechi <azibechi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:44:52 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/18 21:45:44 by azibechi         ###   ########.fr       */
+/*   Updated: 2026/01/12 16:24:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,16 @@ typedef struct s_ray
 	t_axis	delta_dist;
 	t_axis	side_dist;
 	t_axis	step;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	double	perp_wall_dist;
+	int		hit;
+	int		side;
+	double	wall_x;
+	int		tex_x;
+	int		tex_y;
+	
 }			t_ray;
 
 // images void * width and height(to use mlx_file_to_image)
@@ -124,8 +134,8 @@ typedef struct s_game
 {
 	t_data			*data;
 	t_texture		*texture;
-	t_color			floor;
-	t_color			ceiling;
+	uint32_t		floor_color;
+	uint32_t		ceiling_color;
     mlx_texture_t   *tex_north;
     mlx_texture_t   *tex_south;
     mlx_texture_t   *tex_west;
@@ -164,5 +174,14 @@ void	free_array(char **str);
 int			init_engine(t_game *game);
 void		raycasting(t_game *game);
 uint32_t 	get_tex_pixel(mlx_texture_t *tex, int x, int y);
+
+//HOOKS
+void		ft_hooks(void *param)
+void		close_hook(void *param);
+
+// TEXTURES
+void		load_textures(t_game *game);
+void    	ft_print_tex(t_ray ray, t_game game, t_player p, mlx_texture_t tex);
+
 
 #endif
