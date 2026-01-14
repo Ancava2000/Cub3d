@@ -154,6 +154,7 @@ void	raycasting(t_game *game)
 	t_ray			*ray;
 	t_player		*p;
 	mlx_texture_t	*tex;
+	int				y;
 
 	x = 0;
 	ray = &game->raycasting;
@@ -165,7 +166,12 @@ void	raycasting(t_game *game)
 		dda(ray, game, (int)p->pos.x, (int)p->pos.y);
 		calc_distance(ray);
 		select_texture(ray, game, &tex, p);
-		ft_print_tex(ray, game, tex);
+		y = 0;
+		while (y < ray->draw_start)
+			mlx_put_pixel(game->image, ray->x, y++, game->ceiling_color);
+		y = ft_print_tex(ray, game, tex, y);
+		while (y < HEIGHT)
+			mlx_put_pixel(game->image, ray->x, y++, game->floor_color);
 		x++;
 	}
 }

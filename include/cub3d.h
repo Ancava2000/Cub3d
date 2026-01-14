@@ -6,7 +6,7 @@
 /*   By: azibechi <azibechi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:44:52 by acarro-v          #+#    #+#             */
-/*   Updated: 2026/01/14 19:17:10 by azibechi         ###   ########.fr       */
+/*   Updated: 2026/01/14 20:16:54 by azibechi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,31 +58,29 @@ typedef struct s_moves
 	bool	rigth;
 }			t_moves;
 
-/* typedef struct s_draw
-{
-
-}			 t_draw; */
-
 // struct raycasting (ray direction, x camera coordenate(calculate vector of the direction), )
 typedef struct s_ray
 {
-	int		x;
-	t_axis	ray_dir;
-	double	camera_x;
-	t_axis	delta_dist;
-	t_axis	side_dist;
-	t_axis	step;
-	int		map_x;
-	int		map_y;
-	int		line_height;
-	int		draw_start;
-	int		draw_end;
-	double	perp_wall_dist;
-	int		hit;
-	int		side;
-	double	wall_x;
-	int		tex_x;
-	int		tex_y;
+	int			x;
+	t_axis		ray_dir;
+	double		camera_x;
+	t_axis		delta_dist;
+	t_axis		side_dist;
+	t_axis		step;
+	int			map_x;
+	int			map_y;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	double		perp_wall_dist;
+	int			hit;
+	int			side;
+	double		wall_x;
+	int			tex_x;
+	int			tex_y;
+	uint32_t	color;
+	double		tex_step;
+	double		tex_pos;
 }			t_ray;
 
 // images void * width and height(to use mlx_file_to_image)
@@ -95,7 +93,7 @@ typedef struct s_image
 }			t_image;
 
 // struct to count textures
-typedef	struct s_count
+typedef struct s_count
 {
 	int	no;
 	int	so;
@@ -114,7 +112,7 @@ typedef struct s_color
 }		t_color;
 
 // struct for textures: name(NO, SO,...) and path(./...)
-typedef struct s_texture t_texture;
+typedef struct s_texture	t_texture;
 
 typedef struct s_texture
 {
@@ -150,7 +148,6 @@ typedef struct s_game
 	t_player		player;
 	t_moves			movements;
 	t_ray			raycasting;
-//	t_draw			draw;
 	void			*mlx;
 	void			*window;
 	mlx_image_t		*image; // to create a canvas
@@ -189,6 +186,6 @@ void		close_hook(void *param);
 
 // TEXTURES
 void		load_textures(t_game *game);
-void		ft_print_tex(t_ray *r, t_game *g, mlx_texture_t *t);
+int			ft_print_tex(t_ray *ray, t_game *game, mlx_texture_t *tex, int y);
 
 #endif
