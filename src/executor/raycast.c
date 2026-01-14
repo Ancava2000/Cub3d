@@ -12,6 +12,18 @@
 
 #include "../../include/cub3d.h"
 
+/* setup_ray: Initializes geometric values for the DDA algorithm.
+
+1. camera_x: Converts pixel 'x' coord to horizontal camera space [-1, 1].
+    -1 = left edge, 0 = center, 1 = right edge.
+2. ray_dir: The direction vector of the ray. It is the sum of the
+    player's direction vector and a portion of the camera plane vector.
+3. delta_dist: Length of ray from one x or y-side to next x or y-side.
+    Computed using Pythagoras (simplified to |1/ray_dir|). 
+4. step: Grid step direction (-1 for left/up, +1 for right/down).
+5. side_dist: Distance from start position to the FIRST x or y-side.
+   Essentially aligns the ray start to the grid lines for the DDA loop. */
+
 void    setup_ray(t_ray *ray, t_player *p)
 {
     ray->camera_x = 2 * x / (double)WIDTH - 1;
@@ -41,6 +53,13 @@ void    setup_ray(t_ray *ray, t_player *p)
     }
 }
 
+/*DDA: Digital Differential Analysis algorithm loop.
+
+1. Iterates step-by-step through the map grid.
+2. Always jumps to the nearest grid line (shortest side_dist).
+3. Updates map position (map_x/y) and side hit (0=vertical, 1=horizontal).
+4. Stops when a wall ('1') is hit or map boundaries are exceeded.*/
+
 void    dda(t_ray ray, int map_x, int map_y)
 {
     ray->hit = 0;
@@ -69,9 +88,19 @@ void    dda(t_ray ray, int map_x, int map_y)
     }
 }
 
+
+
+/* calc_distance: Computes wall distance and vertical drawing bounds.
+
+1. perp_wall_dist: Calculates perpendicular distance to avoid fisheye effect.
+    (Uses side_dist - delta_dist to backtrack one step from the wall hit).
+2. line_height: Determines wall height on screen inversely proportional to distance.
+3. draw_start/end: Calculates top/bottom pixel coordinates for the wall strip,
+   centered vertically on screen, clamped to screen boundaries (0 to HEIGHT). */
+   
 void    calc_distance(t_ray *ray)
 {
-    if (side == 0)
+    if (ray->side == 0)
         ray->perp_wall_dist = (ray->side_dist.x - ray->delta_dist.x);
     else
         ray->perp_wall_dist = (ray->side_dist.y - ray->delta_dist.y);
@@ -86,21 +115,24 @@ void    calc_distance(t_ray *ray)
         ray->draw_end = HEIGHT - 1;
 }
 
+/* If side = 0, the ray hits vertical (East or West). If ray_dir.x is > 0 
+    Is West, else is East. horizontal hit with ray_dir.y > o is North */
+
 void   select_texture(t_ray ray, t_game game, mlx_texture_t, **tex, t_player *p)
 {
-    if (ray->side == 0) // Vertical hit (East/West)
+    if (ray->side == 0)
     {
         if (ray->ray_dir.x > 0)
-            *tex = game->tex_west; // Hit left side of block -> West texture
+            *tex = game->tex_west;
         else
-            *tex = game->tex_east; // Hit right side of block -> East texture
+            *tex = game->tex_east;
     }
-    else // Horizontal hit (North/South)
+    else
     {
         if (ray->ray_dir.y > 0)
-            *tex = game->tex_north; // Hit top side of block -> North texture
+            *tex = game->tex_north;
         else
-            *tex = game->tex_south; // Hit bottom side of block -> South texture
+            *tex = game->tex_south;
     }
     if (ray->side == 0)
         ray->wall_x = p->pos.y + ray->perp_wall_dist * ray->ray_dir.y;
