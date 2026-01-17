@@ -1,0 +1,46 @@
+# MLX42 - La librería gráfica principal que usas para cub3D
+# LLVM - Compilador y optimizador usado por los drivers de OpenGL
+# GLFW - Librería para crear ventanas y manejar input (usada por MLX42)
+# X11 (libX) - Sistema de ventanas de Linux
+# Dynamic Linker (dlopen, dl*) - Sistema que carga librerías dinámicas en runtime
+# valgrind --leak-check=full --show-leak-kinds=all --suppressions=mlx42.supp ./cub3D src/maps/good/subject_map.cub 
+
+{
+   Ignore_all_LLVM_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:*/libLLVM.so*
+}
+
+{
+   Ignore_all_glfw_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:*/libglfw*
+}
+
+{
+   Ignore_all_X11_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:*/libX*
+}
+
+{
+   Ignore_all_mlx42_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:*/libmlx42*
+}
+
+{
+   Ignore_dl_open_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:_dl_open*
+}
