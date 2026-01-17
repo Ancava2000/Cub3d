@@ -23,6 +23,9 @@ void	close_hook(void *param)
 	exit(0);
 }
 
+// w and s: with dir, the player moves in the direction it looks
+// (forward or backward).
+// a and d: with plane, the player moves laterally.
 static void	ft_hook_w_a(t_game *game, t_player *p)
 {
 	double	new_x;

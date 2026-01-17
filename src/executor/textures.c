@@ -22,7 +22,8 @@ void	load_textures(t_game *game)
 	if (!game->tex_north || !game->tex_south
 		|| !game->tex_east || !game->tex_west)
 	{
-		puts(mlx_strerror(mlx_errno)); //CREO QUE PUTS NO SE PUEDE USAR
+		ft_putendl_fd(mlx_strerror(mlx_errno), 2);
+		//puts(mlx_strerror(mlx_errno)); //CREO QUE PUTS NO SE PUEDE USAR
 		ft_error_msg("Failed to load textures\n", game);
 		exit(1);
 	}

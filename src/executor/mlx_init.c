@@ -12,6 +12,10 @@
 
 #include "../../include/cub3d.h"
 
+// Init all the variables necessary for the raycasting and movement:
+// Direction where the player is looking, camera plane
+// (width of the player's field of vision)
+// and replace the letter(N, S, W, E) to 0
 static void	init_player(t_game *game)
 {
 	int	x;
@@ -29,7 +33,7 @@ static void	init_player(t_game *game)
 		game->player.dir.x = -1;
 	game->player.plane.x = -game->player.dir.y * 0.66;
 	game->player.plane.y = game->player.dir.x * 0.66;
-//	printf("\nDEBUG: Player Pos: x=%f, y=%f\n", game->player.pos.x, game->player.pos.y);
+//	printf("\nDEBUG: Player Pose: x=%f, y=%f\n", game->player.pos.x, game->player.pos.y);
 	x = (int)game->player.pos.x;
 	y = (int)game->player.pos.y;
 	game->data->map_array[y][x] = '0';
@@ -71,6 +75,8 @@ void	load_game_textures(t_game *game)
 	}
 }
 
+// Init game: window, image, player and textures.
+// Loop: keys, game and when close.
 int	init_engine(t_game *game)
 {
 	game->mlx = mlx_init(WIDTH, HEIGHT, TITLE, true);
