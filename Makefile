@@ -8,7 +8,7 @@ DEF_COLOR 			=	\033[0;39m
 
 # Flags
 # -------
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -I$(INCDIR)/MLX42/include
 LDFLAGS = -L$(MLXDIR)/build -lmlx42 -lglfw -ldl -lm -pthread
 # -------
