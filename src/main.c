@@ -6,60 +6,11 @@
 /*   By: azibechi <azibechi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:38:07 by acarro-v          #+#    #+#             */
-/*   Updated: 2026/01/14 16:19:13 by azibechi         ###   ########.fr       */
+/*   Updated: 2026/01/31 12:11:26 by azibechi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-void	print_map(t_game *game)
-{
-    int i = 0;
-    
-    printf("\n=== MAP ===\n");
-    while (game->data->map_array[i])
-    {
-        printf("[%d]: %s", i, game->data->map_array[i]);
-        i++;
-    }
-}
-
-void	print_textures_split(t_game *game)
-{
-    int i = 0;
-    
-    printf("\n=== TEXTURES_SPLIT (array after split) ===\n");
-    while (game->data->textures_split[i])
-    {
-        printf("[%d]: %s\n", i, game->data->textures_split[i]);
-        i++;
-    }
-}
-
-void	print_texture_list(t_game *game)
-{
-    t_texture *current = game->texture;
-    int i = 0;
-    
-    printf("\n=== TEXTURE LINKED LIST ===\n");
-    while (current)
-    {
-        printf("Node %d:\n", i);
-        printf("  Name: '%s'\n", current->name);
-        printf("  Path: '%s'\n", current->path);
-        current = current->next;
-        i++;
-    }
-}
-
-/* void	print_colors(t_game *game)
-{
-    printf("\n=== COLORS ===\n");
-    printf("Ceiling: R=%d G=%d B=%d\n", 
-        game->ceiling.r, game->ceiling.g, game->ceiling.b);
-    printf("Floor:   R=%d G=%d B=%d\n", 
-        game->floor.r, game->floor.g, game->floor.b);
-} */
 
 // Init all the parse data
 int	init_parse(t_game *game)
@@ -103,18 +54,11 @@ int	main(int ac, char **av)
 		return (ft_error_msg("Error allocating memory for data\n", game));
 	if (init_parse(game))
 		return (-1);
-	(void)ac;
-	(void)av;
 	if (check_args(ac, av, game))
 		return (-1);
 	if (parse(av, game))
 		return (-1);
-	print_textures_split(game);
-	print_texture_list(game);
-//	print_colors(game);
-	print_map(game);
 	init_engine(game);
-	printf("\n\n%d\n", game->data->map_height);
 	free_game(game);
 	return (0);
 }

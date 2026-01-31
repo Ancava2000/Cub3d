@@ -12,7 +12,6 @@
 
 #include "../../include/cub3d.h"
 
-// ESTA FUNCION CREO Q ES ILEGAL, NO SE PUEDE USAR GNL
 void	close_hook(void *param)
 {
 	t_game	*game;
@@ -107,7 +106,6 @@ void	ft_hooks(void *param)
 {
 	t_game		*game;
 	t_player	*p;
-
 
 	game = (t_game *)param;
 	p = &game->player;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: azibechi <azibechi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 05:41:17 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/22 14:24:13 by acarro-v         ###   ########.fr       */
+/*   Updated: 2026/01/31 12:11:55 by azibechi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	free_game(t_game *game)
 		if (game->image)
 			mlx_delete_image(game->mlx, game->image);
 		if (game->tex_north)
-			mlx_delete_texture(game->tex_north);;
+			mlx_delete_texture(game->tex_north);
 		if (game->tex_south)
 			mlx_delete_texture(game->tex_south);
 		if (game->tex_west)
@@ -90,7 +90,7 @@ int	ft_error_msg(char *str, t_game *game)
 	write(2, str, ft_strlen(str));
 	if (game)
 	{
-		get_next_line(-1);// clean all the buffer (show leak in valgrind)
+		get_next_line(-1);
 		free_game(game);
 	}
 	return (1);

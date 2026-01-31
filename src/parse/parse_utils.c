@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: azibechi <azibechi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 14:21:45 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/15 11:28:37 by acarro-v         ###   ########.fr       */
+/*   Updated: 2026/01/31 12:19:43 by azibechi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	is_dir_token(const char *line)
 	return (!ft_strncmp(line, "NO", 2) || !ft_strncmp(line, "SO", 2)
 		|| !ft_strncmp(line, "WE", 2) || !ft_strncmp(line, "EA", 2));
 }
-
 
 int	check_open_path(char *path)
 {
@@ -31,7 +30,8 @@ int	check_open_path(char *path)
 }
 
 // Proccess the line, skipping the spaces or tabs and adding a '\n'.
-// When the line starts with the texture name it is added to the texture_line via a temp variable.
+// When the line starts with the texture name it is added to the 
+// texture_line via a temp variable.
 // If a 1 isn't found, it shows the no map error.
 int	process_texture_lines(t_game *game, int *count)
 {

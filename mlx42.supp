@@ -10,7 +10,7 @@
    Memcheck:Leak
    match-leak-kinds: reachable
    ...
-   obj:*/libLLVM.so*
+   obj:*/libLLVM*
 }
 
 {
@@ -43,4 +43,26 @@
    match-leak-kinds: reachable
    ...
    fun:_dl_open*
+}
+
+{
+   ignore_dl_load_strncmp_generic
+   Memcheck:Addr8
+   fun:strncmp
+   fun:is_dst
+   ...
+   fun:dl_open_worker
+   ...
+}
+
+{
+   ignore_dl_find_object_update_leak_generic
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   ...
+   fun:_dl_find_object_update
+   ...
+   fun:_dl_open
+   ...
 }

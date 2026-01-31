@@ -89,8 +89,6 @@ void	dda(t_ray *ray, t_game *game, int map_x, int map_y)
 	}
 }
 
-
-
 /* calc_distance: Computes wall distance and vertical drawing bounds.
 
 1. perp_wall_dist: Calculates perpendicular distance to avoid fisheye effect.
@@ -175,4 +173,3 @@ void	raycasting(t_game *game)
 		x++;
 	}
 }
-

@@ -12,23 +12,6 @@
 
 #include "../../include/cub3d.h"
 
-void	load_textures(t_game *game)
-{
-	game->tex_north = mlx_load_png("src/textures/boca.png");
-	game->tex_south = mlx_load_png("src/textures/ravioles.png");
-	game->tex_east = mlx_load_png("src/textures/boca.png");
-	game->tex_west = mlx_load_png("src/textures/boca.png");
-
-	if (!game->tex_north || !game->tex_south
-		|| !game->tex_east || !game->tex_west)
-	{
-		ft_putendl_fd(mlx_strerror(mlx_errno), 2);
-		//puts(mlx_strerror(mlx_errno)); //CREO QUE PUTS NO SE PUEDE USAR
-		ft_error_msg("Failed to load textures\n", game);
-		exit(1);
-	}
-}
-
 int	ft_print_tex(t_ray *ray, t_game *game, mlx_texture_t *tex, int y)
 {
 	int			i;
@@ -57,5 +40,3 @@ int	ft_print_tex(t_ray *ray, t_game *game, mlx_texture_t *tex, int y)
 	}
 	return (y);
 }
-
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: azibechi <azibechi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:09:29 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/11 18:46:20 by acarro-v         ###   ########.fr       */
+/*   Updated: 2026/01/31 12:21:26 by azibechi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ char	*buffer_copy(char *buffer)
 		i++;
 	}
 	if (buffer[i] == '\n')
-    {
-        line[i] = '\n';
-        i++;
-    }
+	{
+		line[i] = '\n';
+		i++;
+	}
 	line[i] = '\0';
 	return (line);
 }
@@ -103,7 +103,7 @@ char	*get_next_line(int fd)
 	static char	*buffer;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0) 
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
 		free(buffer);
 		buffer = NULL;

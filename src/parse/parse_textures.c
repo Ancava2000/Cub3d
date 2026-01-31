@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarro-v <acarro-v@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: azibechi <azibechi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:52:14 by acarro-v          #+#    #+#             */
-/*   Updated: 2025/12/15 13:04:17 by acarro-v         ###   ########.fr       */
+/*   Updated: 2026/01/31 12:12:54 by azibechi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int	textures_split(t_game *game)
 
 	i = 0;
 	game->data->textures_split = ft_split(game->data->textures_line, '\n');
-	free(game->data->textures_line);// free due to not being used
-	game->data->textures_line = NULL;// avoids a double free
+	free(game->data->textures_line);
+	game->data->textures_line = NULL;
 	textures_split = game->data->textures_split;
 	while (textures_split[i])
 	{
@@ -89,7 +89,8 @@ int	check_text_name(char *line)
 	return (0);
 }
 
-// Saves the textures in texture_line, checks the count and split the line by '\n'
+// Saves the textures in texture_line, 
+// checks the count and split the line by '\n'
 int	parse_textures(t_game *game)
 {
 	int	count;
